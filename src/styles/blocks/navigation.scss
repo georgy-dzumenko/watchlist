@@ -1,0 +1,67 @@
+.navigation {
+  height: 50px;
+  display: grid;
+  width: 100%;
+  align-items: center;
+  grid-template-columns: 100px 1fr 1fr;
+  grid-template-rows: 100%;
+  align-content: center;
+  background: #C4C4C4;
+  transition: all 0.3s ease-in;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-sizing: border-box;
+
+  &:hover {
+    background: transparent;
+    box-shadow: 0 1px 3px #000;
+  }
+
+  &__main {
+    display: flex;
+    height: 100%;
+
+    border-left: 1px #000 solid;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    width: 85px;
+    height: 100%;
+    border-radius: 4px;
+    font-family: "Raleway";
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0.3em;
+
+  }
+
+  &__search {
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 30px;
+    font-family: "Raleway";
+    color: #000;
+    font-weight: bold;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+
+    letter-spacing: -0.065em;
+    
+    &:hover {
+      background: rgba(2, 2, 2, 0.123)
+    }
+  }
+}
