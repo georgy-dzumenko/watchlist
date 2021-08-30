@@ -1,20 +1,42 @@
-.navigation {
-  height: 50px;
-  display: grid;
-  width: 100%;
-  align-items: center;
-  grid-template-columns: 100px 1fr 1fr;
-  grid-template-rows: 100%;
-  align-content: center;
-  background: #C4C4C4;
-  transition: all 0.3s ease-in;
-  padding-left: 30px;
-  padding-right: 30px;
-  box-sizing: border-box;
+@import "../utils/vars";
+@import "../utils/mixins";
 
-  &:hover {
-    background: transparent;
-    box-shadow: 0 1px 3px #000;
+.navigation {
+  // position: relative;
+
+  &__content {
+    position:relative;
+    height: 50px;
+    display: grid;
+    width: 100%;
+    align-items: center;
+    grid-template-columns: 100px 1fr 1fr;
+    grid-template-rows: 100%;
+    align-content: center;
+    background: white;
+    box-shadow: 0 1px 3px $c-gray;
+    transition: all 0.3s ease-in;
+    padding: 0 30px;
+    box-sizing: border-box;
+  
+    @include onMobile() {
+      padding: 0;
+      display: flex;
+      grid-template-columns: 1fr;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  &__menu {
+    display: none;
+    color: black;
+    position: relative;
+
+    @include onMobile {
+      display: block;
+    }
   }
 
   &__main {
@@ -22,6 +44,10 @@
     height: 100%;
 
     border-left: 1px #000 solid;
+
+    @include onMobile {
+      display: none;
+    }
   }
 
   &__logo {
@@ -36,15 +62,229 @@
     line-height: 30px;
     letter-spacing: 0.3em;
 
+    @include onMobile {
+      display: none;
+    }
   }
 
   &__search {
+    align-items: center;
+    display: block;
+    // position: absolute;
+    position: relative;
+    
     font-size: 20px;
     display: flex;
     justify-content: flex-end;
+
+    @include onMobile() {
+      position:static;
+      width: 100%;
+    }
   }
 
+  &__search-icon {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
+    transition: all 1s ease;
+  }
+
+  &__search-icon--active {
+    padding-right: 30px;
+    color: $c-gray;
+  }
+
+
+  &__search-input {
+    box-sizing: border-box;
+    font-family: "Raleway";
+    font-size: 100%;
+    border-radius: 0;
+    padding-left: 20px;
+    border: 1px solid $c-gray;
+    outline: none;
+    width: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    opacity: 0;
+    height:35px;
+    transition: all 0.5s ease;
+    transition: opacity 0.1 ease;
+
+    @include onMobile() {
+      position: absolute;
+    }
+
+    &:focus {
+      opacity: 1;
+      border: 1px solid black;
+      box-shadow: 0 1px 2px $c-red;
+    }
+  }
+
+  &__search-input--active {
+    // opacity: 1;
+    width: 100%;
+    transform: scaleX(100%);
+  }
+
+  &__search-results-block {
+    visibility: hidden;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    list-style: none;
+    position: absolute;
+    max-height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    opacity: 0;
+    bottom: 0;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid $c-gray;
+    height: max-content;
+    transition: all 0.2s ease;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: $c-light-gray;
+      border: none
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $c-gray;
+      border-radius: 3px;
+    }
+
+  }
+
+  &__search-results-block--active {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  &__search-result {
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    height: 90px;
+    border-bottom: 1px solid $c-gray;
+    border-top: 1px solid $c-gray;
+    border-right: 0 solid $c-gray;
+    transform-origin: left bottom;
+    background-color: #fff;
+    
+    transition: all 0.2s ease;
+    
+    &:hover {
+      border-right: 60px solid $c-light-red;
+      box-shadow: 0 7px 3px $c-light-gray;
+    }
+
+  }
+  
+  &__search-result-title {
+    width: 370px;
+    display: inline-block;
+    font-family: "Raleway";
+    font-weight: bold;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0;
+    margin-left: 10px;
+
+    @include onMobile() {
+      width: 150px;
+      font-size: 15px;
+    }
+  }
+
+  &__search-result-img {
+    transition: all 1s ease;
+    background: #000;
+    display: block;
+    object-position: left;
+    height: 100%;
+    width: 60px;
+    object-fit: contain;
+  }
+
+  &__search-more-results {
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    font-family: "Raleway";
+    font-weight: bold;
+    color: rgb(41, 151, 255);
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      color: rgb(0, 26, 255);
+    }
+  }
+
+  &__search-no-results {
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    font-family: "Raleway";
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+  }
+
+
   &__link {
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    z-index: 9;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 30px;
+    font-family: "Raleway";
+    font-weight: bold;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+
+    letter-spacing: -0.065em;
+
+    
+    &:hover {
+      background: $c-light-red;
+    }
+  }
+
+  &__link-text {
+    height: 100%;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    color:black;
+    transition: all 1s ease-in;
+  }
+  
+  &__dropdown {
+    position: relative;
+    cursor: pointer;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -58,10 +298,61 @@
     font-size: 20px;
     line-height: 24px;
 
-    letter-spacing: -0.065em;
-    
     &:hover {
-      background: rgba(2, 2, 2, 0.123)
+      background: $c-light-red;
+    }
+
+    &::after {
+      content: url("../../../node_modules/@fortawesome/fontawesome-free/svgs/solid/chevron-down.svg");
+      display: block;
+      height: 20px;
+      width: 20px;
+      margin-left: 10px;
+      transition: all 0.3s cubic-bezier(.65,-0.04,.29,.99);
+    }
+  }
+
+  &__dropdown--active {
+    &::after {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__dropdown-options-block {
+    z-index: -9;
+    transition: all 0.2s ease;
+    position: absolute;
+    width: 100%;
+    height: max-content;
+    top: 100%;
+    bottom: 0;
+    transform: translateX(-31px);
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid black;
+    border-bottom: none;
+    border-top: none;
+  }
+
+  &__dropdown-options-block--active {
+    transform-origin: top center;
+    transform: translateX(-31px) translateY(-100%) scaleY(0);
+  }
+
+  &__dropdown-option {
+    display: flex;
+    align-items: center;
+    border-right: 0 solid $c-light-red;
+    padding-left: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 50px;
+    border-bottom: 1px rgba(61, 61, 61, 0.336) solid;
+    transition: all 0.1s ease;
+
+    &:hover {
+      border-right: 30px solid $c-light-red;
     }
   }
 }

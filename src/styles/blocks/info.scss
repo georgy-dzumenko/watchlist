@@ -1,0 +1,22 @@
+.info {
+  padding-top: 20px;
+  
+  &__title {
+    margin: 0;
+    margin-right: 30px;
+  }
+
+  &__param {
+    align-items: center;
+    display: flex;
+  }
+
+  &__api {
+    background-image: url(../../images/tmdb.svg);
+    background-repeat: no-repeat;
+    width: 200px;
+    background-position: center;
+    height: 15px;
+    object-fit: contain;
+  }
+}
