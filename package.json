@@ -24,6 +24,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "deploy": "gh-pages-deploy",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
