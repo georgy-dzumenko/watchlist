@@ -1,18 +1,32 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { getMoviesByYear } from '../components/api'
+import { MoviesSlider } from '../components/MoviesSlider';
+import { Poster } from '../components/Poster';
 
-export const Info = () => {  
+export const Home = () => {
+  const [moviesOnPoster, setMoviesOnPoster] = useState([]);
 
+  useEffect(() => {
+    getMoviesByYear(2021).then((response) => setMoviesOnPoster(response.reverse() || [{}]))
+  }, [])
+  
   return (
-    <div className="info">
+    <div className="page home">
       <div className="container">
-        <div className="info__param">
-          <h1 className="info__title">
-            API:
-          </h1>
-          <a href="https://www.themoviedb.org/">
-            <div className="info__api" />
-          </a>
-        </div>
+        <h1 className="page__title">
+          Home
+        </h1>
+        
+        <section className="page__section">
+          <Poster moviesList={moviesOnPoster}/>
+        </section>
+
+        <section className="page__section">
+          <MoviesSlider moviesList={moviesOnPoster}/>
+        </section>
+        <section className="page__section">
+          <MoviesSlider moviesList={moviesOnPoster}/>
+        </section>
       </div>
     </div>
   )

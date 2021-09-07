@@ -1,0 +1,70 @@
+.person-page {
+  &__poster {
+    margin-bottom: 50px;
+    display: block;
+    position: relative;
+    padding-bottom: 150%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__poster-img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__name {
+    font-size: 40px;
+    margin: 0;
+    padding-bottom: 30px;
+    position: relative;
+    display: block;
+    width: 100%;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 20%;
+      display: block;
+      height: 5px;
+      width: 100%;
+      background-color: $c-light-red;
+    }
+  }
+
+  &__biography {
+  }
+
+  &__biography-main {
+    padding: 20px 0;
+    border-bottom: 5px solid $c-light-red;
+    border-top: 5px solid $c-light-red;
+    display: block;
+    font-size: 20px;
+    color: $c-dark-gray;
+  }
+
+  &__params {
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+
+  &__param {
+    width: 100%;
+    background-color: $c-light-gray;
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+  }
+
+  &__section-title {
+    font-weight: normal;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+}

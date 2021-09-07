@@ -12,15 +12,13 @@ export const Menu = () => {
   return (
     <div id="menu" className={classNames("menu", {"menu--active": location.hash === "#menu"})}>
       <div className="navigation">
-        <div className="container">
-          <div className="navigation__content">
-            <HashLink
-              smooth to="#"
-              className="menu__close-button"
-            >
-              <FontAwesomeIcon icon={faChevronLeft}/>
-            </HashLink>
-          </div>
+        <div className="navigation__content">
+          <HashLink
+            smooth to="#"
+            className="menu__close-button"
+          >
+            <FontAwesomeIcon icon={faChevronLeft}/>
+          </HashLink>
         </div>
       </div>
       <div className="container">

@@ -1,0 +1,58 @@
+.movie-page {
+  &__poster {
+    display: block;
+    position: relative;
+    padding-bottom: 150%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__poster-img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__description {
+    padding-left: 7px;
+    border-left: 2px solid $c-gray;
+    overflow-x: hidden;
+    height: max-content;
+  }
+
+  &__genres-list {
+    padding: 15px 0;
+    display: flex;
+    gap: 10px;
+  }
+
+  &__overview {
+    padding-right: 20%;
+    color: $c-gray;
+    font-size: 20px;
+  }
+
+  &__genre {
+    cursor: pointer;
+    border: 2px solid lightgreen;
+    font-weight: bold;
+    color: lightgreen;
+    border-radius: 20px;
+    width: max-content;
+    padding: 5px;
+  }
+
+  &__title {
+    display: block;
+    width: 100%;
+    height: max-content;
+    background-color: $c-light-red;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 60px;
+    margin-bottom: 40px;
+  }
+}

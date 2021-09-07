@@ -1,0 +1,112 @@
+@import "../utils/vars";
+
+.movie-card {
+  z-index: 1;
+  display: block;
+  position: relative;
+  --description-width: 0;
+  --description-boder-right-width: 0;
+  --description-boder-width: 0;
+  cursor: pointer;
+
+  width: 200px;
+  height: 300px;
+  background-color: #000;
+  transition: all 0.2s ease;
+
+  margin: 10px;
+
+  &--last {
+    margin-right: $description-max-width;
+  }
+
+  &__img {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__description {
+    background-color: #fff;
+    overflow: hidden;
+    position: absolute;
+    // box-sizing: border-box;
+    transition: width 1s cubic-bezier(0,1.09,.2,.98), border-right 1s cubic-bezier(1,-0.06,.42,.95);
+    border: var(--description-boder-width) solid $c-gray;
+    border-right: var(--description-boder-right-width) solid $c-red;
+    width: var(--description-width);
+    left: 0;
+    right: 100%;
+    top: 0;
+    bottom: 0;
+  }
+
+  &__description-img {
+    height: 40%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  &__description-content {
+    background-color: #fff;
+    display: block;
+    margin-left: 10px;
+  }
+  
+  &__description-title {
+    z-index: 3;
+    margin: 0;
+    display: block;
+    width: 270px;
+    height: max-content;
+    text-shadow: 0 0 1px white;
+    
+    @include onMobile() {
+      font-size: medium;
+      width: 140px;
+    }
+  }
+  
+  &__description-ganre {
+    margin-right: 5px;
+    display: inline;
+    color: lightgreen;
+
+    @include onMobile() {
+      font-size: small;
+    }
+  }
+  
+  &__description-ganres-list {
+    display: block;
+    width: 250px;
+    height: max-content;
+    padding: 0;
+    margin: 5px 0;
+    
+    @include onMobile() {
+      width: 100px;
+    }
+  }
+  
+  &:hover {
+    --description-boder-width: 1px;
+    --description-width: #{$description-max-width};
+    --description-boder-right-width: 60px;
+    
+    @include onMobile() {
+      --description-width: #{$description-max-width--mobile};
+      --description-boder-right-width: 30px;
+    }
+    
+    transform: scale(105%);
+    // transform: translateY(-4px);
+    // --description-display: block; 
+  }
+
+  @include onMobile() {
+    width: 100px;
+    height: 150px; 
+  }
+}

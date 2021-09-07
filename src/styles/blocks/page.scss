@@ -1,0 +1,20 @@
+.page {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1300px;
+  padding: 30px 0;
+
+  &__title {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 40px;
+  }
+
+  &__section {
+    margin-bottom: 100px;
+
+    @include onMobile() {
+      margin-bottom: 50px;
+    }
+  }
+}

@@ -3,7 +3,8 @@ import "../styles/blocks/navigation.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import debounce from 'lodash.debounce'
-import { getMoviesByTitle } from './api'
+import { getMovieImg, getMoviesByTitle } from './api'
+import { Link } from 'react-router-dom'
 
 const classNames = require("classnames")
 
@@ -60,11 +61,13 @@ export const NavigationSearch = () => {
             <>
               {
                 results.map(result => (
-                  <li key={result.id} className="navigation__search-result">
-                    <img src={`https://image.tmdb.org/t/p/original/${result.poster_path}`} alt="" className="navigation__search-result-img" />
-                    <h2 className="navigation__search-result-title">
-                      {result.title}
-                    </h2>
+                  <li key={result.id}>
+                    <Link to={`/movies/${result.id}`} className="navigation__search-result">
+                      <img src={getMovieImg(result.poster_path, true)} alt="" className="navigation__search-result-img" />
+                      <h2 className="navigation__search-result-title">
+                        {result.title}
+                      </h2>
+                    </Link>
                   </li>
                 ))
               }

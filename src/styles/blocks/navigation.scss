@@ -2,9 +2,9 @@
 @import "../utils/mixins";
 
 .navigation {
-  // position: relative;
 
   &__content {
+    z-index: 5;
     position:relative;
     height: 50px;
     display: grid;
@@ -20,7 +20,7 @@
     box-sizing: border-box;
   
     @include onMobile() {
-      padding: 0;
+      padding: 0 20px;
       display: flex;
       grid-template-columns: 1fr;
       background-color: transparent;
@@ -51,6 +51,10 @@
   }
 
   &__logo {
+    font-style: none;
+    
+    color: $c-red;
+
     display: flex;
     align-items: center;
     width: 85px;
@@ -308,7 +312,7 @@
       height: 20px;
       width: 20px;
       margin-left: 10px;
-      transition: all 0.3s cubic-bezier(.65,-0.04,.29,.99);
+      transition: all 0.2s cubic-bezier(.65,-0.04,.29,.99);
     }
   }
 
@@ -319,14 +323,14 @@
   }
 
   &__dropdown-options-block {
-    z-index: -9;
-    transition: all 0.2s ease;
+    transition: opacity 0.1s ease;
     position: absolute;
-    width: 100%;
+    opacity: 1;
+    left: 0;
+    right: 0;
     height: max-content;
     top: 100%;
     bottom: 0;
-    transform: translateX(-31px);
     display: flex;
     flex-direction: column;
     background: #fff;
@@ -336,8 +340,9 @@
   }
 
   &__dropdown-options-block--active {
+    opacity: 0;
     transform-origin: top center;
-    transform: translateX(-31px) translateY(-100%) scaleY(0);
+    transform: scaleY(0);
   }
 
   &__dropdown-option {

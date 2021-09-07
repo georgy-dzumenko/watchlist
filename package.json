@@ -1,6 +1,6 @@
 {
-  "homepage": "http://georgy-dzumenko.github.io/watchlist",
-  "name": "my-app",
+  "homepage": ".",
+  "name": "watchlist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
