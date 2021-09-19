@@ -16,4 +16,15 @@
     object-position: center;
   }
 
+  &__part {
+    margin: 10px 0;
+    border-bottom: 3px solid $c-light-red;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background-color: $c-light-gray;
+      transform: translateY(-10px);
+    }
+  }
+
 }

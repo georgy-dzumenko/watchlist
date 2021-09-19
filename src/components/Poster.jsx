@@ -1,9 +1,30 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import 'swiper/components/navigation/navigation.less';
+import 'swiper/components/navigation/navigation.scss'
+// import 'swiper/components/pagination/pagination.min.css';
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss';
+import 'swiper/components/scrollbar/scrollbar.min.css';
+import 'swiper/components/pagination/pagination.less';
+import 'swiper/swiper.min.css'
+import 'swiper/swiper-bundle.css'
+import 'swiper/swiper.scss'
+import 'swiper/swiper.less'
+import { Thumbs } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Autoplay } from 'swiper';
+import { EffectCoverflow } from 'swiper';
+
+
+import { Navigation, Pagination, A11y, Parallax } from 'swiper';
 
 import debounce from 'lodash.debounce';
+import { getMovieImg } from './api';
+import { Link } from 'react-router-dom';
 
+SwiperCore.use([Autoplay, Pagination, Navigation, EffectCoverflow, Parallax]);
 const classNames = require("classnames");
 
 export const Poster = ({moviesList}) => {
@@ -46,17 +67,34 @@ export const Poster = ({moviesList}) => {
   }, [selectedMovieId])
 
   return (
-    <div className="poster">
-    <div onClick={prevMovie} className="poster__arrow poster__arrow--left"><FontAwesomeIcon icon={faChevronLeft}/></div>
-    <img
-      src={moviePicture.src}
-      className={classNames("poster__img", {"poster__img--active": isActive})}
-    ></img>
-    <h1 className="poster__title">
-      {moviesList[selectedMovieId]?.title}
-    </h1>
-    <div className={classNames("poster__timer", {})}></div>
-    <div onClick={nextMovie} className="poster__arrow poster__arrow--right"><FontAwesomeIcon icon={faChevronRight}/></div>
-  </div>
+    <Swiper
+      modules={[Navigation, Pagination, A11y, EffectCoverflow, Parallax]}
+      effect="coverflow"
+      spaceBetween={0}
+      slidesPerView={1}
+      navigation
+      pagination={{ clickable: true }}
+      loop={true}
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false
+      }}
+      onSwiper={(swiper) => console.log(swiper)}
+    >
+        {moviesList?.map((movie) => (
+          <SwiperSlide>
+            <div className="poster">
+              <Link to={`${movie.media_type}/${movie.id}`}>
+                <img src={getMovieImg(movie.backdrop_path)} className="poster__img"/>
+                <div className="poster__title">
+                  {movie.title}
+                </div>
+              </Link>
+            </div>
+          </SwiperSlide>
+        ))}
+        <div className="prev"></div>
+        <div className="next"></div>
+      </Swiper>
   )
 }

@@ -1,4 +1,26 @@
 .movie-page {
+  &__trailer {
+    position: relative;
+    padding-bottom: 50%;
+    width: 100%;
+  }
+
+  &__video {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__votes {
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  &__votes-value {
+    color: lightgreen;
+  }
+
   &__poster {
     display: block;
     position: relative;
@@ -14,13 +36,6 @@
     bottom: 0;
     object-fit: cover;
     object-position: center;
-  }
-
-  &__description {
-    padding-left: 7px;
-    border-left: 2px solid $c-gray;
-    overflow-x: hidden;
-    height: max-content;
   }
 
   &__genres-list {
@@ -50,9 +65,10 @@
     width: 100%;
     height: max-content;
     background-color: $c-light-red;
+    color: #fff;
     border-radius: 5px;
     font-weight: bold;
     font-size: 60px;
-    margin-bottom: 40px;
+    margin: 0;
   }
 }

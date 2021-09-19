@@ -1,26 +1,33 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MovieCard } from './MovieCard';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getMovieImg } from './api';
+import { getGenres, getMovieImg } from './api';
 import { PersonCard } from './PersonCard';
+
+const classNames = require('classnames');
 
 export const MoviesSlider = ({moviesList = null, peopleList = []}) => {
   const slider = useRef(null);
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    getGenres().then((response) => setGenres(response));
+  }, [])
 
   return (
     <div
-    className="movies-slider"
+      className="movies-slider"
     >
       {/* <img src={bannerMovie} className="movies-slider__banner"></img> */}
       <div
         onClick={() => {
-          slider.current.scrollTo({
+          slider.current.scrollBy({
             left: -1 * slider.current.clientWidth * 0.9,
             behavior: "smooth"
           })
         }}
-        className="movies-slider__scroll-button movies-slider__scroll-button--left"
+        className={classNames(["movies-slider__scroll-button", "movies-slider__scroll-button--left", {"movies-slider--disabled": moviesList || peopleList}])}
         >
         <FontAwesomeIcon icon={faChevronLeft}/>
       </div>
@@ -36,7 +43,7 @@ export const MoviesSlider = ({moviesList = null, peopleList = []}) => {
           ))}
           {!!moviesList ? moviesList?.map((movie, index) => (
             <div>
-              <MovieCard last={index === 0} movie={movie}/>
+              <MovieCard last={index === 0} movie={movie} genres={genres}/>
             </div>
           )) : ''}
         </div>

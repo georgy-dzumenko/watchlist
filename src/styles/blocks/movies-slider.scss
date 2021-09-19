@@ -1,4 +1,9 @@
 .movies-slider {
+
+  &--disabled {
+    display: none;
+  }
+
   position: relative;
   width: 100%;
 

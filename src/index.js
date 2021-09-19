@@ -3,14 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
+import { createStore } from 'redux';
+import { rootReducer } from './redux/rootReducer';
+import { Provider } from 'react-redux';
+import { applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+
+export const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router basename="/watchlist/">
-      <App />
-    </Router>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <Router basename="/">
+        <App />
+      </Router>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

@@ -32,7 +32,7 @@
     overflow: hidden;
     position: absolute;
     // box-sizing: border-box;
-    transition: width 1s cubic-bezier(0,1.09,.2,.98), border-right 1s cubic-bezier(1,-0.06,.42,.95);
+    transition: width 1s cubic-bezier(0,1.09,.2,.98), border-right 0.5s cubic-bezier(1,-0.06,.42,.95);
     border: var(--description-boder-width) solid $c-gray;
     border-right: var(--description-boder-right-width) solid $c-red;
     width: var(--description-width);
@@ -55,6 +55,8 @@
   }
   
   &__description-title {
+    color: #fff;
+    background-color: $c-red;
     z-index: 3;
     margin: 0;
     display: block;

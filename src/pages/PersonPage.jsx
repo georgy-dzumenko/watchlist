@@ -81,11 +81,11 @@ export const PersonPage = ({id}) => {
               credits.crew?.reduce((prev, cur) => ({
                 filtered: {
                   [cur.job]: prev.full.filter((e) => e.job === cur.job),
-                  ...prev.filtered
+                  ...prev.filtered,
                 },
                 full: prev.full.filter((e) => e.job !== cur.job)
               }), {full: credits.crew}).filtered || {}
-            ).map((movie) => (
+            ).sort((a, b) => b[1].length - a[1].length).map((movie) => (
               <div className="grid__item--1-12">
               <h2 className="person-page__section-title">
                 {movie[0]}

@@ -17,4 +17,11 @@
       margin-bottom: 50px;
     }
   }
+
+  &__description {
+    padding-left: 7px;
+    border-left: 2px solid $c-gray;
+    overflow-x: hidden;
+    height: max-content;
+  }
 }

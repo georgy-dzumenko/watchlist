@@ -18,18 +18,4 @@
   font-family: "Raleway";
   position: relative;
   min-height: 100vh;
-
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    width: 5px;
-    background-color: $c-gray;
-  }
-
-  &::-webkit-scrollbar-track {
-    width: 5px;
-    background-color: $c-light-gray;
-  }
 }

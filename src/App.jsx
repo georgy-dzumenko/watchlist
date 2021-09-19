@@ -10,34 +10,36 @@ import { Home } from './pages/Home'
 import { CollectionPage } from './pages/CollectionPage';
 import { PersonCard } from './components/PersonCard';
 import { PersonPage } from './pages/PersonPage';
+import {Switch} from 'react-router'
 
 function App() {
   const match = useRouteMatch('/movie/:movieId')
   const [moviesList, setMoviesList] = useState([]);
 
   useEffect(() => {
-    getMoviesByYear("2021").then((data) => setMoviesList(data));
+    setMoviesList(getMoviesByYear("2021"))
   }, [])
 
   return (
     <div className="App">
       <Navigation/>
-
-      <Route path="/" exact>
-        <Home/>
-      </Route>
-      <Route path="/info">
-        <Info/>
-      </Route>
-      <Route path="/movies/:movieId" exact>
-        <MoviePage id={match?.params?.movieId}/>
-      </Route>
-      <Route path="/people/:personId" exact>
-        <PersonPage id={match?.params?.personId}/>
-      </Route>
-      <Route path="/collections/:collectionId" exact>
-        <CollectionPage/>
-      </Route>
+      <Switch>
+        <Route name="app" path="/" exact>
+          <Home/>
+        </Route>
+        <Route path="/info">
+          <Info/>
+        </Route>
+        <Route path="/people/:personId" exact>
+          <PersonPage id={match?.params?.personId}/>
+        </Route>
+        <Route path="/:movieType/:movieId" exact>
+          <MoviePage id={match?.params?.movieId}/>
+        </Route>
+        <Route path="/collections/:collectionId" exact>
+          <CollectionPage/>
+        </Route>
+      </Switch>
       
       <Menu />
     </div>

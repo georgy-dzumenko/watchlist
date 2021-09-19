@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useHistory } from 'react-router';
 import { Link, useLocation, useRouteMatch } from 'react-router-dom';
-import { getCredits, getCrew, getGenres, getMovieImg, getMoviesById, getSimilar } from '../components/api';
+import { getCredits, getCrew, getMovieImg, getMoviesById, getSimilar, getTrailer } from '../components/api';
 import {MoviesSlider} from '../components/MoviesSlider'
 
-const classNames = require("classnames");
-
-export const MoviePage = ({id}) => {
-  const match = useRouteMatch("/movies/:movieId");
+export const MoviePage = () => {
+  const match = useRouteMatch("/:movieType/:movieId");
   const [cast, setCast] = useState([])
+  const [trailer, setTrailer] = useState([])
   const [crew, setCrew] = useState([])
   const [movie, setMovie] = useState({});
   const [similar, setSimilar] = useState([]);
@@ -17,11 +15,16 @@ export const MoviePage = ({id}) => {
   console.log(cast)
 
   useEffect(() => {
-    getCrew(match.params.movieId).then((response) => { setCrew(response.reverse()) })
-    getCredits(match.params.movieId).then((response) => { setCast(response.reverse()) })
-    getMoviesById(match.params.movieId).then((response) => { setMovie(response) })
-    getSimilar(match.params.movieId).then((response) => { setSimilar(response) })
+    getTrailer(match.params.movieId, match.params.movieType).then((response) => { setTrailer(response[0]?.key) })
+    getCrew(match.params.movieId, match.params.movieType).then((response) => { setCrew(response.reverse()) })
+    getCredits(match.params.movieId, match.params.movieType).then((response) => { setCast(response.reverse()) })
+    getMoviesById(match.params.movieId, match.params.movieType).then((response) => { setMovie(response) })
+    getSimilar(match.params.movieId, match.params.movieType).then((response) => { setSimilar(response) })
   }, [location])
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [match])
 
   return (
     <div className="page">
@@ -31,9 +34,12 @@ export const MoviePage = ({id}) => {
             <div className="movie-page__poster grid__item--1-4">
               <img src={getMovieImg(movie.poster_path)} alt="" className="movie-page__poster-img appear" />
             </div>
-            <div className="movie-page__description grid grid__item--5-12">
+            <div className="page__description grid grid__item--5-12">
               <div className="grid__item--1-12 page__title movie-page__title slideRight">
                 {movie?.title}
+              </div>
+              <div className="movie-page__votes grid__item--1-12">
+                imdb: <span className="movie-page__votes-value">{movie?.vote_average}</span>
               </div>
               <div className="movie-page__overview grid__item--1-12 slideRight">
                 {movie.overview}
@@ -53,6 +59,17 @@ export const MoviePage = ({id}) => {
                   </Link>
                 </div>
               }
+            </div>
+          </section>
+          <section className="page__section">
+            <div className="movie-page__trailer">
+              <iframe
+                className="movie-page__video"
+                src={`https://www.youtube.com/embed/${trailer}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
             </div>
           </section>
           <section className="page__section">

@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getGenres, getMovieImg } from './api'
+import { getMovieImg } from './api'
+import { useHistory } from 'react-router';
 
 const classNames = require("classnames");
 
-export const MovieCard = ({last = false, movie}) => {
-  const [genres, setGenres] = useState([]);
-
-  useEffect(() => {
-    getGenres().then(response => setGenres(response.genres))
-  }, [])
-  
+export const MovieCard = ({ last = false, movie, genres}) => {
+  const history = useHistory();
   return (
-    <Link
-      to={`/movies/${movie.id}`}
+    <div
+      // to={`/${movie.media_type}/${movie.id}`}
       className={classNames("movie-card", {"movie-card--last": last})}
+      onClick={() => {
+        console.log(history)
+        history.push(`/${movie.media_type}/${movie.id}`)
+        window.location.reload()
+      }}
     >
       <img src={getMovieImg(movie?.poster_path, true)} alt="" className="movie-card__img" />
       <div className="movie-card__description">
@@ -24,12 +26,12 @@ export const MovieCard = ({last = false, movie}) => {
           <ul className="movie-card__description-ganres-list">
             {movie.genre_ids?.map((genreId) =>
               <li className="movie-card__description-ganre">
-                {genres?.find(({id}) => genreId === id)?.name}
+                {genres.find(({id}) => genreId === id)?.name}
               </li>
             )}
           </ul>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
