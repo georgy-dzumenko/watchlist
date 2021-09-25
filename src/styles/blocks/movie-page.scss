@@ -70,5 +70,9 @@
     font-weight: bold;
     font-size: 60px;
     margin: 0;
+
+    @include onMobile() {
+      border-radius: 0;
+    }
   }
 }

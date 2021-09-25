@@ -11,7 +11,7 @@ export const getMoviesByYear = async (year, type = "movie") => {
 
     return fetch(`${BASE_URL}discover/${type}?year=${year}&api_key=${api_key}`)
         .then(response => response.json())
-        .then(data => data.results.map((el) => ({...el, media_type: "tv", title: el.name || el.title})))
+        .then(data => data.results.map((el) => ({...el, media_type: type, title: el.name || el.title})))
 }
 
 export const getCredits = (id, movieType) => fetch(`${BASE_URL}${movieType}/${id}/credits?api_key=${api_key}`)

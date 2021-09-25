@@ -30,21 +30,21 @@ export const MoviePage = () => {
     <div className="page">
       <div className="container">
         <div className="movie-page">
-          <section className="page__section grid">
+          <section className="page__section grid grid--desktop">
             <div className="movie-page__poster grid__item--1-4">
-              <img src={getMovieImg(movie.poster_path)} alt="" className="movie-page__poster-img appear" />
+              <img src={getMovieImg(movie.poster_path)} alt="" className="movie-page__poster-img" />
             </div>
-            <div className="page__description grid grid__item--5-12">
-              <div className="grid__item--1-12 page__title movie-page__title slideRight">
+            <div className="page__description grid__item--5-12 grid grid--desktop">
+              <div className="grid__item--1-12 page__title movie-page__title">
                 {movie?.title}
               </div>
               <div className="movie-page__votes grid__item--1-12">
                 imdb: <span className="movie-page__votes-value">{movie?.vote_average}</span>
               </div>
-              <div className="movie-page__overview grid__item--1-12 slideRight">
+              <div className="movie-page__overview grid__item--1-12">
                 {movie.overview}
               </div>
-              <div className="movie-page__genres-list grid__item-1-12 slideRight">
+              <div className="movie-page__genres-list grid__item-1-12">
                 {movie.genres?.map(({name}) =>
                   <div className="movie-page__genre">
                     {name}

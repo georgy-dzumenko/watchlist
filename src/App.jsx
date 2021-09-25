@@ -11,9 +11,10 @@ import { CollectionPage } from './pages/CollectionPage';
 import { PersonCard } from './components/PersonCard';
 import { PersonPage } from './pages/PersonPage';
 import {Switch} from 'react-router'
+import { SearchPage } from './pages/SearchPage';
 
 function App() {
-  const match = useRouteMatch('/movie/:movieId')
+  const match = useRouteMatch('/:mediaType/:mediaId')
   const [moviesList, setMoviesList] = useState([]);
 
   useEffect(() => {
@@ -27,18 +28,26 @@ function App() {
         <Route name="app" path="/" exact>
           <Home/>
         </Route>
+        <Route name="app" path="/search" exact>
+          <SearchPage/>
+        </Route>
         <Route path="/info">
           <Info/>
         </Route>
         <Route path="/people/:personId" exact>
           <PersonPage id={match?.params?.personId}/>
         </Route>
-        <Route path="/:movieType/:movieId" exact>
-          <MoviePage id={match?.params?.movieId}/>
+        <Route path="/:mediaId/:mediaId" exact>
+          {match?.params?.mediaType !== 'collections'
+            ?
+            <MoviePage id={match?.params?.mediaId}/>
+            :
+            <CollectionPage/>
+          }
         </Route>
-        <Route path="/collections/:collectionId" exact>
-          <CollectionPage/>
-        </Route>
+        {/* <Route path="/collections/:collectionId" exact>
+          
+        </Route> */}
       </Switch>
       
       <Menu />

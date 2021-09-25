@@ -12,4 +12,10 @@
       }
     }
   }
+
+  &--desktop {
+    @include onMobile() {
+      display: block;
+    }
+  }
 }

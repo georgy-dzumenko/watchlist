@@ -28,14 +28,14 @@ export const Navigation = () => {
         </Link>
         <div className="navigation__main">
           <NavigationDropdown text="film catalogue"/>
-          <a href="#" className="navigation__link">
-            <div className="navigation__link-text">
-              watchlist
-            </div>
-          </a>
           <Link to="/info" className="navigation__link">
             <div className="navigation__link-text">
               Info
+            </div>
+          </Link>
+          <Link to="/search" className="navigation__link">
+            <div className="navigation__link-text">
+              search
             </div>
           </Link>
         </div>

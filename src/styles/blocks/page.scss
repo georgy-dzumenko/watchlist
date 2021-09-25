@@ -23,5 +23,10 @@
     border-left: 2px solid $c-gray;
     overflow-x: hidden;
     height: max-content;
+
+    @include onMobile() {
+      border: none;
+      padding: 0;
+    }
   }
 }
