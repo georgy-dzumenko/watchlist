@@ -1,0 +1,33 @@
+.checkbox {
+  height: max-content;
+  border-bottom: 0;
+
+  &__options-switcher {
+    background-color: $c-light-red;
+    color: #fff;
+    font-size: 24px;
+  }
+
+  &__options-block {
+    transition: all 0.2s ease;
+    overflow-y: hidden;
+    height: max-content;
+    transform: scaleY(0);
+    width: 100%;
+  }
+
+  &__options-block--active {
+    transition: all 0.2s ease;
+    transform-origin: top;
+    transform: scale(100%);
+  }
+
+  &__option {
+    height: 30px;
+    font-size: 24px;
+
+    &:hover {
+      background-color: $c-light-gray;
+    }
+  }
+}
