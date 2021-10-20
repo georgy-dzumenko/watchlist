@@ -1,7 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useRouteMatch } from 'react-router-dom';
-import { getCredits, getCrew, getMovieImg, getMoviesById, getSimilar, getTrailer } from '../components/api';
+import { getCredits, getCrew, getMovieImg, getMoviesById, getReviews, getSimilar, getTrailer } from '../components/api';
 import {MoviesSlider} from '../components/MoviesSlider'
+
+import "swiper/swiper-bundle.css";
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, A11y } from 'swiper';
+// import SwiperCore, {
+//   EffectCards
+// } from 'swiper';
+
+// // install Swiper modules
+// SwiperCore.use([EffectCards]);
 
 export const MoviePage = () => {
   const match = useRouteMatch("/:movieType/:movieId");
@@ -10,6 +21,7 @@ export const MoviePage = () => {
   const [crew, setCrew] = useState([])
   const [movie, setMovie] = useState({});
   const [similar, setSimilar] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const location = useLocation();
 
   console.log(cast)
@@ -20,7 +32,8 @@ export const MoviePage = () => {
     getCredits(match.params.movieId, match.params.movieType).then((response) => { setCast(response.reverse()) })
     getMoviesById(match.params.movieId, match.params.movieType).then((response) => { setMovie(response) })
     getSimilar(match.params.movieId, match.params.movieType).then((response) => { setSimilar(response) })
-  }, [location])
+    getReviews(match.params.movieId, match.params.movieType).then((response) => { setReviews(response) })
+  }, [location, match.params.movieId, match.params.movieType])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -64,6 +77,7 @@ export const MoviePage = () => {
           <section className="page__section">
             <div className="movie-page__trailer">
               <iframe
+                title="trailer"
                 className="movie-page__video"
                 src={`https://www.youtube.com/embed/${trailer}`}
                 frameBorder="0"
@@ -71,6 +85,35 @@ export const MoviePage = () => {
                 allowFullScreen
               />
             </div>
+          </section>
+          <section className="page__section">
+            <div className="page__title">
+              reviews
+            </div>
+              {
+                reviews.map((review) => (
+                    <div className="review">
+                      <div className="review__author">
+                        <img
+                          src={
+                            getMovieImg(review.author_details.avatar_path, true)
+                          }
+                          alt=""
+                          className="review__author-img"
+                        />
+                        <div className="review__author-nickname">
+                          {review.author_details.name}
+                        </div>
+                      </div>
+                      <div className="review__content">
+                        {review.content}
+                      </div>
+                      <div className="review__footer">
+                        {new Date(review.created_at).toLocaleString('default', { year: 'numeric', month: 'long' })}
+                      </div>
+                    </div>
+                ))
+              }
           </section>
           <section className="page__section">
             <div className="page__title">

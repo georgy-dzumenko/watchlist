@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { MovieCard } from './MovieCard';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getGenres, getMovieImg } from './api';
+import { getGenres } from './api';
 import { PersonCard } from './PersonCard';
 
 const classNames = require('classnames');

@@ -54,6 +54,22 @@
     }
   }
 
+  &__avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__right-side-block {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
   &__logo {
     font-style: none;
     

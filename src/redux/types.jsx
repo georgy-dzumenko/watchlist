@@ -1,0 +1,1 @@
+export const SET_SESSION_ID = "SESSION/SET_ID"

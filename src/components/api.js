@@ -2,7 +2,7 @@ const BASE_URL = "https://api.themoviedb.org/3/";
 const api_key = "a1cacae9e097c731c0046cf30fa3b749";
 
 export const getMoviesByYear = async (year, type = "movie") => {
-    if(type == "multi") {
+    if(type === "multi") {
         return fetch(`${BASE_URL}discover/movie?year=${year}&api_key=${api_key}`)
             .then(response => response.json())
             .then(data => data.results.map((el) => ({...el, media_type: "movie"})))
@@ -13,6 +13,46 @@ export const getMoviesByYear = async (year, type = "movie") => {
         .then(response => response.json())
         .then(data => data.results.map((el) => ({...el, media_type: type, title: el.name || el.title})))
 }
+
+export const createToken = () => fetch(`${BASE_URL}/authentication/token/new?api_key=${api_key}`)
+    .then(response => response.json())
+
+export const createSessionWithLogin = (username, password, token) => fetch(
+        `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${api_key}`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            method: 'POST',
+            body:  JSON.stringify({
+                username,
+                password,
+                request_token: token
+            })
+        }
+    )
+    .then((res) => res.json())
+
+export const createSession = (token) => fetch(
+    `https://api.themoviedb.org/3/authentication/session/new?api_key=${api_key}`,
+    {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        method: 'POST',
+        body:  JSON.stringify({
+            request_token: token
+        })
+    }
+)
+.then((res) => res.json())
+
+
+
+export const getAccInfo = (sid) => fetch(`${BASE_URL}account?api_key=${api_key}&session_id=${sid}`)
+    .then(response => response.json())
 
 export const getCredits = (id, movieType) => fetch(`${BASE_URL}${movieType}/${id}/credits?api_key=${api_key}`)
     .then(response => response.json())
@@ -32,6 +72,24 @@ export const getPersonsCredits = (id) => fetch(`${BASE_URL}person/${id}/combined
 
 export const getPerson = (id) => fetch(`${BASE_URL}person/${id}?api_key=${api_key}`)
     .then(response => response.json())
+
+export const getPeopleArr = (idArr) => {
+    const resultArr = idArr.map(async (id) => {
+        const response = await fetch(`${BASE_URL}person/${id}?api_key=${api_key}`)
+        const result = response.json();
+        return result;
+    })
+
+    return resultArr;
+}
+
+export const getReviews = (id, mediaType) => fetch(`${BASE_URL}${mediaType}/${id}/reviews?api_key=${api_key}`)
+    .then(response => response.json())
+    .then(({results}) => results)
+
+export const findPerson = (query) => fetch(`${BASE_URL}search/person?api_key=${api_key}&query=${query}`)
+    .then(response => response.json())
+    .then(({results}) => results)
 
 export const getMoviesByTitle = (title) => fetch(`${BASE_URL}search/multi?query=${title}&api_key=${api_key}`)
     .then(response => response.json())

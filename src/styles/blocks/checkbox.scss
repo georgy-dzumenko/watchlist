@@ -1,33 +1,88 @@
 .checkbox {
   height: max-content;
   border-bottom: 0;
+  position: relative;
+  z-index: 1;
 
   &__options-switcher {
-    background-color: $c-light-red;
+    cursor: pointer;
+    display: flex;
+    position: relative;
+    align-content: center;
+    background-color: $c-red;
     color: #fff;
     font-size: 24px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      // left: 100%;
+      right: 10px;
+      transition: all 0.1s ease;
+      width: 24px;
+      height: 24px;
+      color: #fff;
+      background-image: url(../../../node_modules/@fortawesome/fontawesome-free/svgs/solid/chevron-down.svg);
+      
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    &--active {
+      &::after {
+        transition: all 0.1s ease;
+        transform: rotateZ(180deg);
+      }
+    }
   }
 
   &__options-block {
     transition: all 0.2s ease;
     overflow-y: hidden;
-    height: max-content;
-    transform: scaleY(0);
+    height: 0;
+    // transform: scaleY(0);
     width: 100%;
   }
 
   &__options-block--active {
     transition: all 0.2s ease;
     transform-origin: top;
-    transform: scale(100%);
+    height: max-content;
+    // transform: scale(100%);
   }
 
   &__option {
+    transition: all 0.1s ease;
+    cursor: pointer;
     height: 30px;
     font-size: 24px;
 
-    &:hover {
-      background-color: $c-light-gray;
+    position: relative;
+    border-bottom: 2px solid $c-gray;
+
+    &::after {
+      content: url(../../../node_modules/@fortawesome/fontawesome-free/svgs/solid/check.svg);
+      transform: scale(0);
+      transition: all 0.1s ease;
+      position: absolute;
+      display: block;
+      right: 0;
+      width: 30px;
+      top: 0;
+      bottom: 0;
+    }
+
+    &--active {
+      &::after {
+        transform: scale(100%);
+        border-left: 2px solid $c-light-green;
+        background-color: $c-light-green;
+      }
+
+      background-color: $c-light-red;
+      color: #fff;
+
     }
   }
 }

@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React from 'react'
 import { getMovieImg } from './api'
 import { useHistory } from 'react-router';
 

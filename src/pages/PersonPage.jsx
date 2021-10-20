@@ -1,12 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useHistory } from 'react-router';
-import { Link, useLocation, useRouteMatch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useLocation, useRouteMatch } from 'react-router-dom';
 import { getPerson, getPersonImg, getPersonsCredits } from '../components/api';
 import {MoviesSlider} from '../components/MoviesSlider'
 
-const classNames = require("classnames");
-
-export const PersonPage = ({id}) => {
+export const PersonPage = () => {
   const match = useRouteMatch("/people/:personId");
   const [credits, setCredits] = useState([]);
   const [person, setPerson] = useState({})
@@ -15,14 +12,14 @@ export const PersonPage = ({id}) => {
   useEffect(() => {
     getPerson(match.params.personId).then((response) => setPerson(response));
     getPersonsCredits(match.params.personId).then((response) => setCredits(response));
-  }, [location])
+  }, [location, match.params.personId])
 
   return (
     <div className="page">
       <div className="container">
         <div className="person-page grid">
           <div className="person-page__poster grid__item--1-4">
-            <img src={getPersonImg(person.profile_path)} className="person-page__poster-img"></img>
+            <img src={getPersonImg(person.profile_path)} className="person-page__poster-img" alt=""></img>
           </div>
           <div className="grid__item--5-12">
             <h1 className="person-page__name">

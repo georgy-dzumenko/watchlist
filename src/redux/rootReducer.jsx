@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { genresReducer } from "./genresReducer";
+import { sessionReducer } from "./sessionReducer";
 
 export const rootReducer = combineReducers({
-  genres: genresReducer,
+  session: sessionReducer,
 })

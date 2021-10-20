@@ -1,0 +1,87 @@
+.login {
+  z-index: 20;
+  background: #fff;
+  right: 50%;
+  top: 40vh;
+  position: fixed;
+  margin: 0 auto;
+  width: 400px;
+  height: max-content;
+  border: 2px solid $c-gray;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  display: flex;
+  transform: translate(50%, -50%) scale(0);
+  opacity: 0;
+  padding: 10px;
+  border-radius: 10px;
+
+  &--active {
+    transform: translate(50%, -50%) scale(100%);
+    opacity: 1;
+    box-shadow: 0px 15px 31px 1000px rgba(0, 0, 0, 0.527);
+  }
+
+  &__title {
+    display: block;
+    width: 100%;
+    font-size: 25px;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    border-bottom: 2px solid $c-gray;
+  }
+
+  &__close-button {
+    position: absolute;
+    top: 15px;;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(../../../node_modules/@fortawesome/fontawesome-free/svgs/solid/times.svg);
+  }
+  
+  &__label {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  &__field {
+    border: 2px solid $c-gray;
+    display: block;
+    width: auto;
+    margin: 5px 0;
+    height: 30px;
+  }
+  
+  &__submit-button {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    border: 2px solid $c-gray;
+    display: block;
+    width: 100%;
+    background-color: $c-green;
+    margin: 5px 0;
+    height: 40px;
+  }
+
+  &__log-out-button {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    border: 2px solid $c-gray;
+    display: block;
+    width: 100%;
+    background-color: $c-red;
+    margin: 5px 0;
+    height: 40px;
+  }
+}

@@ -1,5 +1,4 @@
 import React from 'react'
-import { MoviesSlider } from '../components/MoviesSlider'
 
 export const Info = () => {  
 

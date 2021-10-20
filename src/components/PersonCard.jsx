@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
-import { getGenres, getMovieImg } from './api'
+import { getMovieImg } from './api'
 
 const classNames = require("classnames");
 

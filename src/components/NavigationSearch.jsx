@@ -13,7 +13,7 @@ export const NavigationSearch = () => {
   const [results, setResluts] = useState([]);
   const [text, setText] = useState("");
 
-  const input = useRef(null)
+  const input = useRef('')
 
   const onSearch = useCallback(debounce((title) => {
     getMoviesByTitle(title).then((data) => setResluts((data || []).slice(0, 7)))
