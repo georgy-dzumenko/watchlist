@@ -1,0 +1,103 @@
+.watchlist {
+  &__list-select-block {
+    display: flex;
+    height: 45px;
+    margin-top: -30px;
+    border-bottom: 5px #000 solid;
+  }
+
+  &__folder-lottie {
+    width: 30px;
+    height: 30px;
+  }
+
+  &__list-select-link {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #000;
+    width: min-content;
+    cursor: pointer;
+    line-height: 100%;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-weight: bold;
+    translate: all 0.1s ease;
+
+    &:hover {
+      background-color: $c-light-gray;
+    }
+
+    &--active {
+      color: $c-red;
+      transform: scale(90%)
+    }
+  }
+
+  &__list {
+    background-color: $c-light-gray;
+  }
+
+  &__card {
+    background-color: #fff;
+    margin-bottom: 25px;
+    height: 200px;
+    border: 4px $c-red solid;
+    display: flex;
+    border-radius: 50px;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  &__remove-from-watchlist-block {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: $c-light-gray;
+    margin-left: auto;
+  }
+
+  &__card-img {
+    cursor: pointer;
+    object-fit: contain;
+    width: min-content;
+    height: 200px;
+    // border: 4px $c-red solid;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      object-fit: cover;
+      transform: scale(125%);
+      transform-origin: left;
+    }
+  }
+
+  &__description {
+    height: 100%;
+  }
+
+  &__description-title {
+    height: min-content;
+    margin: 0;
+    background-color: $c-red;
+    color: #fff;
+    padding: 3px 5px;
+  }
+
+  &__description-genres-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__description-genre {
+    border: 4px $c-light-green solid;
+    font-weight: bold;
+    color: $c-green;
+    margin: 5px;
+    border-radius: 20px;
+    padding: 3px;
+  }
+}

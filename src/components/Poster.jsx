@@ -1,10 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import "swiper/swiper-bundle.css";
-// import "swiper/css/effect-flip"
-// import "swiper/css/pagination"
-// import "swiper/css/navigation"
 
-// import "swiper/styles.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay } from 'swiper';
 import { EffectCoverflow } from 'swiper';

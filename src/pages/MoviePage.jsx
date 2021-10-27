@@ -2,19 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useRouteMatch } from 'react-router-dom';
 import { getCredits, getCrew, getMovieImg, getMoviesById, getReviews, getSimilar, getTrailer } from '../components/api';
 import {MoviesSlider} from '../components/MoviesSlider'
+import AddToWatchListButton from '../components/AddToWatchListButton';
 
-import "swiper/swiper-bundle.css";
+import { motion } from 'framer-motion';
+import { connect } from 'react-redux';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y } from 'swiper';
-// import SwiperCore, {
-//   EffectCards
-// } from 'swiper';
-
-// // install Swiper modules
-// SwiperCore.use([EffectCards]);
-
-export const MoviePage = () => {
+const MoviePage = ({accInfo}) => {
   const match = useRouteMatch("/:movieType/:movieId");
   const [cast, setCast] = useState([])
   const [trailer, setTrailer] = useState([])
@@ -24,7 +17,7 @@ export const MoviePage = () => {
   const [reviews, setReviews] = useState([]);
   const location = useLocation();
 
-  console.log(cast)
+  // console.log(accInfo)
 
   useEffect(() => {
     getTrailer(match.params.movieId, match.params.movieType).then((response) => { setTrailer(response[0]?.key) })
@@ -33,7 +26,7 @@ export const MoviePage = () => {
     getMoviesById(match.params.movieId, match.params.movieType).then((response) => { setMovie(response) })
     getSimilar(match.params.movieId, match.params.movieType).then((response) => { setSimilar(response) })
     getReviews(match.params.movieId, match.params.movieType).then((response) => { setReviews(response) })
-  }, [location, match.params.movieId, match.params.movieType])
+  }, [location.pathname, match.params.movieId, match.params.movieType])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,34 +37,60 @@ export const MoviePage = () => {
       <div className="container">
         <div className="movie-page">
           <section className="page__section grid grid--desktop">
-            <div className="movie-page__poster grid__item--1-4">
+            <motion.div
+              initial={{opacity: 0, translateX: -100}}
+              animate={{opacity: 1, translateX: 0}}
+              transition={{ duration: 0.5}}
+              className="movie-page__poster grid__item--1-4"
+            >
               <img src={getMovieImg(movie.poster_path)} alt="" className="movie-page__poster-img" />
-            </div>
-            <div className="page__description grid__item--5-12 grid grid--desktop">
-              <div className="grid__item--1-12 page__title movie-page__title">
-                {movie?.title}
-              </div>
-              <div className="movie-page__votes grid__item--1-12">
-                imdb: <span className="movie-page__votes-value">{movie?.vote_average}</span>
-              </div>
-              <div className="movie-page__overview grid__item--1-12">
-                {movie.overview}
-              </div>
-              <div className="movie-page__genres-list grid__item-1-12">
-                {movie.genres?.map(({name}) =>
-                  <div className="movie-page__genre">
-                    {name}
-                  </div>
-                )}
-              </div>
-              {movie.belongs_to_collection &&
-                <div className="grid__item--1-12">
-                  collection:
-                  <Link to={`/collections/${movie.belongs_to_collection.id}`}>
-                    {movie.belongs_to_collection.name}
-                  </Link>
+            </motion.div>
+            <div className="page__description grid__item--5-12 grid--desktop">
+              <motion.div
+                initial={{opacity: 0, translateX: -200}}
+                animate={{opacity: 1, translateX: 0}}
+                transition={{ duration: 0.7}}
+                className="grid"
+              >
+                <div className="grid__item--1-12 page__title movie-page__title">
+                  {movie?.title}
                 </div>
-              }
+                <div className="movie-page__votes grid__item--1-12">
+                  imdb: <span className="movie-page__votes-value">{movie?.vote_average}</span>
+                </div>
+                <div className="movie-page__overview grid__item--1-12">
+                  {movie.overview}
+                </div>
+                <div className="movie-page__genres-list grid__item-1-12">
+                  {movie.genres?.map(({name}) =>
+                    <div className="movie-page__genre">
+                      {name}
+                    </div>
+                  )}
+                </div>
+                {movie.belongs_to_collection &&
+                  <div className="grid__item--1-12">
+                    collection:
+                    <Link className="movie-page__action-title-link" to={`/collections/${movie.belongs_to_collection.id}`}>
+                      {movie.belongs_to_collection.name}
+                    </Link>
+                  </div>
+                }
+                <div className="grid__item--1-12">
+                  <div className="movie-page__action">
+                    <div className="movie-page__activon-title">
+                      Add to/remove from <Link to={`/watchlist/${match.params.movieType}`} className="movie-page__action-title-link">watchlist</Link>
+                    </div>
+                    {!!accInfo.username
+                      &&
+                        <AddToWatchListButton
+                          media_id={match.params.movieId}
+                          media_type={match.params.movieType}
+                        />
+                    }
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </section>
           <section className="page__section">
@@ -136,3 +155,5 @@ export const MoviePage = () => {
     </div>
   )
 }
+
+export default connect((state) => ({accInfo: state.session.accInfo}))(MoviePage)

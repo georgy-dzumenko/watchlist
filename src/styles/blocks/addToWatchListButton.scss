@@ -1,0 +1,12 @@
+.addToWatchListButton {
+  width: 60px;
+  height: min-content;
+  // padding-bottom: 100%;
+  cursor: pointer;
+  // position: absolut;
+  display: block;
+
+  &--hidden {
+    display: none;
+  }
+}

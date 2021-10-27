@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "../styles/blocks/navigation.scss"
+import { Link } from 'react-router-dom';
 
 const classNames = require("classnames");
 
@@ -20,11 +21,11 @@ export const NavigationDropdown = ({text}) => {
           {text}
         </div>
         <div className={classNames("navigation__dropdown-options-block", {"navigation__dropdown-options-block--active": !isActive})}>
-          <div className="navigation__dropdown-option">
+          <Link to='/watchlist/tv'className="navigation__dropdown-option">
             <div className="navigation__link-text">
-              aasfadfsdfsa
+              watchlist
             </div>
-          </div>
+          </Link>
           <div className="navigation__dropdown-option">
             <div className="navigation__link-text">
               aasfadfsdfsa

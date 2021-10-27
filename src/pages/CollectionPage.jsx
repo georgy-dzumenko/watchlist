@@ -25,7 +25,7 @@ export const CollectionPage = () => {
             </div>
           </div>
           {collection?.parts?.map((part) => (
-            <Link to={`/movies/${part.id}`} className="collections-page__part grid grid__item--1-12">
+            <Link to={`/movie/${part.id}`} className="collections-page__part grid grid__item--1-12">
               <div className="collections-page__poster grid__item--1-2">
                 <img src={getMovieImg(part.poster_path, true)} className="collections-page__poster-img" alt=""></img>
               </div>

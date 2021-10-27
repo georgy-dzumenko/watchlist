@@ -1,7 +1,7 @@
 import './styles/App.scss';
 import { Menu } from './components/Menu';
 import { Route, useRouteMatch } from 'react-router-dom'
-import { MoviePage } from './pages/MoviePage';
+import MoviePage from './pages/MoviePage';
 import { Info } from './pages/Info'
 import Home from './pages/Home'
 import { CollectionPage } from './pages/CollectionPage';
@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { getAccInfo } from './components/api';
 import LoginWindow from './pages/LoginWindow';
 import Navigation from './components/Navigation'
+import WatchlistPage from './pages/WatchlistPage';
 
 function App() {
   const match = useRouteMatch('/:mediaType/:mediaId')
@@ -40,10 +41,13 @@ function App() {
         <Route path="/people/:personId" exact>
           <PersonPage id={match?.params?.personId}/>
         </Route>
+        <Route path="/watchlist/:mediaType" exact>
+          <WatchlistPage/>
+        </Route>
         <Route path="/:mediaId/:mediaId" exact>
           {match?.params?.mediaType !== 'collections'
             ?
-            <MoviePage id={match?.params?.mediaId}/>
+            <MoviePage id={match?.params?.mediaId} key={Math.random()}/>
             :
             <CollectionPage/>
           }

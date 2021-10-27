@@ -49,7 +49,42 @@ export const createSession = (token) => fetch(
 )
 .then((res) => res.json())
 
+export const deleteSession = (session_id) => fetch(
+    `https://api.themoviedb.org/3/authentication/session?api_key=${api_key}`,
+    {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        method: 'POST',
+        body:  JSON.stringify({
+            session_id
+        })
+    }
+)
 
+export const addToWatchlist = ({session_id, account_id, media_type, media_id, watchlist}) => {
+    return fetch(
+    `https://api.themoviedb.org/3/account/${account_id}/watchlist?api_key=${api_key}&session_id=${session_id}`,
+    {
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
+        },
+        method: 'POST',
+        body:  JSON.stringify({
+            media_type,
+            media_id,
+            watchlist,
+        })
+    })
+}
+
+export const getWatchlist = ({session_id, account_id, media_type}) => fetch(
+    `https://api.themoviedb.org/3/account/${account_id}/watchlist/${media_type === 'movie' ? 'movies' : 'tv'}?api_key=${api_key}&session_id=${session_id}`
+)
+    .then((res) => res.json())
+    .then((res) => res.results)
 
 export const getAccInfo = (sid) => fetch(`${BASE_URL}account?api_key=${api_key}&session_id=${sid}`)
     .then(response => response.json())

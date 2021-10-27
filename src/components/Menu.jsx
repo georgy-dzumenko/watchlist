@@ -11,6 +11,7 @@ export const Menu = () => {
 
   return (
     <div id="menu" className={classNames("menu", {"menu--active": location.hash === "#menu"})}>
+    
       <div className="navigation">
         <div className="navigation__content">
           <HashLink

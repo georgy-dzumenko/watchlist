@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
-import { getAccInfo, getMoviesByYear } from '../components/api'
+import { getMoviesByYear } from '../components/api'
 import { MoviesSlider } from '../components/MoviesSlider';
 import { Poster } from '../components/Poster';
 
-const Home = ({session_id}) => {
+const Home = ({accInfo}) => {
   const [moviesOnPoster, setMoviesOnPoster] = useState([]);
   const [newTv, setNewTv] = useState([]);
-  const [accInfo, setAccInfo] = useState({});
   const [newMovies, setNewMovies] = useState([]);
 
   useEffect(() => {
@@ -21,17 +20,13 @@ const Home = ({session_id}) => {
     
   }, [])
 
-  useEffect(() => {
-    getAccInfo(session_id).then((res) => setAccInfo(res))
-  }, [session_id])
-
   return (
     <div className="page home">
       <div className="container">
         <h1 className="page__title">
-          {!accInfo.username
+          {!accInfo?.username
             ? "Home"
-            : `Hi, ${accInfo.username}!`
+            : `Hi, ${accInfo?.username}!`
           }
         </h1>
         
@@ -58,4 +53,4 @@ const Home = ({session_id}) => {
   )
 }
 
-export default connect((state) => ({session_id: state.session.session}))(Home)
+export default connect((state) => ({session_id: state.session.session, accInfo: state.session.accInfo}))(Home)

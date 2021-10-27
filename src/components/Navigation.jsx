@@ -15,8 +15,6 @@ const Navigation = ({session_id}) => {
     getAccInfo(session_id).then((res) => setAccInfo(res))
   }, [session_id])
 
-  console.log('acc', accInfo)
-
   return (
     <div className="navigation">
       <div className="navigation__content">
