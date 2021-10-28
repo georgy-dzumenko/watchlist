@@ -74,7 +74,7 @@
     font-style: none;
     
     color: $c-red;
-
+    text-decoration: none;
     display: flex;
     align-items: center;
     width: 85px;
@@ -92,6 +92,7 @@
   }
 
   &__search {
+    z-index: 20;
     align-items: center;
     display: block;
     // position: absolute;
@@ -100,10 +101,19 @@
     font-size: 20px;
     display: flex;
     justify-content: flex-end;
+    width: 100%;
 
     @include onMobile() {
       position:static;
       width: 100%;
+    }
+  }
+
+  &__search--active {
+    @include onMobile() {
+      position: absolute;
+      right: 0;
+      left: 0;
     }
   }
 
@@ -135,7 +145,7 @@
     transform-origin: right;
     transform: scaleX(0);
     opacity: 0;
-    height:35px;
+    height: 45px;
     transition: all 0.5s ease;
     transition: opacity 0.1 ease;
 
@@ -179,6 +189,10 @@
     border: 1px solid $c-gray;
     height: max-content;
     transition: all 0.2s ease;
+
+    @include onMobile {
+      top: calc(100% + 23px);
+    }
 
     &::-webkit-scrollbar {
       width: 5px;

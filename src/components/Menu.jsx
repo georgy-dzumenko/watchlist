@@ -33,14 +33,19 @@ export const Menu = () => {
             </HashLink>
           </li>
           <li className="menu__main-item">
-            <HashLink className="menu__link" to="/info">
-              info
+            <HashLink className="menu__link" to="/watchlist/tv">
+              watchlist
             </HashLink>
           </li>
           <li className="menu__main-item">
-            <a className="menu__link" href="#info">
-              adsadfs
-            </a>
+            <HashLink className="menu__link" to="/favorites/tv">
+              favorites
+            </HashLink>
+          </li>
+          <li className="menu__main-item">
+            <HashLink className="menu__link" to="/info">
+              info
+            </HashLink>
           </li>
         </ul>
       </div>

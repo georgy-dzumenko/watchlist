@@ -1,5 +1,5 @@
-import { getAccInfo, getMoviesById, getWatchlist } from "../components/api"
-import { CLEAN_ACCINFO, CLEAN_WATCHLIST, GET_WATCHLIST, SET_SESSION_ID, UPDATE_ACCINFO, UPDATE_WATCHLIST } from "./types"
+import { getAccInfo, getFavorites, getMoviesById, getWatchlist } from "../components/api"
+import { CLEAN_ACCINFO, CLEAN_FAVORITES, CLEAN_WATCHLIST, GET_WATCHLIST, SET_SESSION_ID, UPDATE_ACCINFO, UPDATE_FAVORITES, UPDATE_WATCHLIST } from "./types"
 
 export const setSessionId = (session_id) => {
   localStorage.setItem('session', session_id)
@@ -33,12 +33,9 @@ export const cleanWatchlist = () => {
 }
 
 export const updateWatchlist = (session_id) => {
-  localStorage.setItem('watchlist', '{}')
   return dispatch => {
     getAccInfo(session_id).then((account) => {
-      console.log('accinf', account.id)
       getWatchlist({session_id, account_id: account.id, media_type: 'tv'}).then((res) => {
-        console.log('accinf', res)
         return res
       }).then((res) => getWatchlist({session_id,  account_id: account.id, media_type: 'movie'}).then((response) => {
         localStorage.setItem('watchlist', JSON.stringify({movie: response, tv: res}))
@@ -49,4 +46,25 @@ export const updateWatchlist = (session_id) => {
       }))
     })
   }
+}
+
+export const updateFavoritesList = (session_id) => {
+  return dispatch => {
+    getAccInfo(session_id).then((account) => {
+      getFavorites({session_id, account_id: account.id, media_type: 'tv'}).then((res) => {
+        return res
+      }).then((res) => getFavorites({session_id,  account_id: account.id, media_type: 'movie'}).then((response) => {
+        localStorage.setItem('favorites', JSON.stringify({movie: response, tv: res}))
+        return (dispatch({
+          type: UPDATE_FAVORITES,
+          payload: {movie: response, tv: res},
+        }))
+      }))
+    })
+  }
+}
+
+export const cleanFavoritesList = () => {
+  localStorage.setItem('favorites', '{}')
+  return ({type: CLEAN_FAVORITES})
 }

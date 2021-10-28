@@ -21,8 +21,17 @@
 @import "./blocks/addToWatchListButton.scss";
 @import "./blocks/watchlist.scss";
 
+html {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   font-family: "Raleway";
   position: relative;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: $c-light-gray;
 }

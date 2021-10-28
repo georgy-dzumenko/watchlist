@@ -43,7 +43,7 @@
     color: $c-gray;
     z-index: 10;
     position: absolute;
-    width: 75px;
+    width: min-content;
     height: 100%;
     top: 50%;
     bottom: 50%;

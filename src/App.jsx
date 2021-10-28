@@ -13,6 +13,7 @@ import { getAccInfo } from './components/api';
 import LoginWindow from './pages/LoginWindow';
 import Navigation from './components/Navigation'
 import WatchlistPage from './pages/WatchlistPage';
+import FavoritesPage from './pages/FavoritesPage';
 
 function App() {
   const match = useRouteMatch('/:mediaType/:mediaId')
@@ -43,6 +44,9 @@ function App() {
         </Route>
         <Route path="/watchlist/:mediaType" exact>
           <WatchlistPage/>
+        </Route>
+        <Route path="/favorites/:mediaType" exact>
+          <FavoritesPage/>
         </Route>
         <Route path="/:mediaId/:mediaId" exact>
           {match?.params?.mediaType !== 'collections'

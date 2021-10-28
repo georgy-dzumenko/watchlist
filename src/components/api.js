@@ -80,8 +80,31 @@ export const addToWatchlist = ({session_id, account_id, media_type, media_id, wa
     })
 }
 
+export const markAsFavorite = ({session_id, account_id, media_type, media_id, favorite}) => {
+    return fetch(
+    `https://api.themoviedb.org/3/account/${account_id}/favorite?api_key=${api_key}&session_id=${session_id}`,
+    {
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
+        },
+        method: 'POST',
+        body:  JSON.stringify({
+            media_type,
+            media_id,
+            favorite,
+        })
+    })
+}
+
 export const getWatchlist = ({session_id, account_id, media_type}) => fetch(
     `https://api.themoviedb.org/3/account/${account_id}/watchlist/${media_type === 'movie' ? 'movies' : 'tv'}?api_key=${api_key}&session_id=${session_id}`
+)
+    .then((res) => res.json())
+    .then((res) => res.results)
+
+export const getFavorites = ({session_id, account_id, media_type}) => fetch(
+    `https://api.themoviedb.org/3/account/${account_id}/favorite/${media_type === 'movie' ? 'movies' : 'tv'}?api_key=${api_key}&session_id=${session_id}`
 )
     .then((res) => res.json())
     .then((res) => res.results)

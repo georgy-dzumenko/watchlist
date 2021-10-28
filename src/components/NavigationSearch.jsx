@@ -22,7 +22,12 @@ export const NavigationSearch = () => {
   return (
     <>
       <div
-        className="navigation__search"
+        className={
+          classNames(
+            "navigation__search",
+            {"navigation__search--active": isActive}
+          )
+        }
       >
         <input
           ref={input}

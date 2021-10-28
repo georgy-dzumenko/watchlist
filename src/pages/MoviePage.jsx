@@ -6,6 +6,7 @@ import AddToWatchListButton from '../components/AddToWatchListButton';
 
 import { motion } from 'framer-motion';
 import { connect } from 'react-redux';
+import MarkAsFavoriteButton from '../components/MarkAsFavoriteButton';
 
 const MoviePage = ({accInfo}) => {
   const match = useRouteMatch("/:movieType/:movieId");
@@ -88,6 +89,13 @@ const MoviePage = ({accInfo}) => {
                           media_type={match.params.movieType}
                         />
                     }
+                    {!!accInfo.username
+                      &&
+                        <MarkAsFavoriteButton
+                          media_id={match.params.movieId}
+                          media_type={match.params.movieType}
+                        />
+                    }
                   </div>
                 </div>
               </motion.div>
@@ -135,14 +143,26 @@ const MoviePage = ({accInfo}) => {
               }
           </section>
           <section className="page__section">
-            <div className="page__title">
-              Cast
-            </div>
-            <MoviesSlider peopleList={cast} />
-            <div className="page__title">
-              Crew
-            </div>
-            <MoviesSlider peopleList={crew} />
+            {cast.length > 0
+              ?
+                <>
+                  <div className="page__title">
+                   Cast
+                  </div>
+                  <MoviesSlider peopleList={cast} />
+                </>
+              : ''
+            }
+            {crew.length > 0
+              ?
+                <>
+                  <div className="page__title">
+                    Crew
+                  </div>
+                  <MoviesSlider peopleList={crew} />
+                </>
+              : ''
+            }
           </section>
           <section className="page__section">
             <div className="page__title">

@@ -7,7 +7,7 @@ import { PersonCard } from './PersonCard';
 
 const classNames = require('classnames');
 
-export const MoviesSlider = ({moviesList = null, peopleList = []}) => {
+export const MoviesSlider = ({moviesList = [], peopleList = []}) => {
   const slider = useRef(null);
   const [genres, setGenres] = useState([]);
 
@@ -17,7 +17,7 @@ export const MoviesSlider = ({moviesList = null, peopleList = []}) => {
 
   return (
     <div
-      className="movies-slider"
+      className={classNames("movies-slider", {"movies-slider--disabled": [...moviesList, ...peopleList].length === 0})}
     >
       {/* <img src={bannerMovie} className="movies-slider__banner"></img> */}
       <div

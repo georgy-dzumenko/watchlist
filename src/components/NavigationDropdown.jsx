@@ -26,11 +26,11 @@ export const NavigationDropdown = ({text}) => {
               watchlist
             </div>
           </Link>
-          <div className="navigation__dropdown-option">
+          <Link to='/favorites/tv'className="navigation__dropdown-option">
             <div className="navigation__link-text">
-              aasfadfsdfsa
+              favorites
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </>
