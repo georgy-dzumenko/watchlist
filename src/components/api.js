@@ -18,7 +18,7 @@ export const createToken = () => fetch(`${BASE_URL}/authentication/token/new?api
     .then(response => response.json())
 
 export const createSessionWithLogin = (username, password, token) => fetch(
-        `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${api_key}`,
+        `${BASE_URL}authentication/token/validate_with_login?api_key=${api_key}`,
         {
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export const createSessionWithLogin = (username, password, token) => fetch(
     .then((res) => res.json())
 
 export const createSession = (token) => fetch(
-    `https://api.themoviedb.org/3/authentication/session/new?api_key=${api_key}`,
+    `${BASE_URL}authentication/session/new?api_key=${api_key}`,
     {
         headers: {
             'Content-Type': 'application/json',
@@ -50,13 +50,13 @@ export const createSession = (token) => fetch(
 .then((res) => res.json())
 
 export const deleteSession = (session_id) => fetch(
-    `https://api.themoviedb.org/3/authentication/session?api_key=${api_key}`,
+    `${BASE_URL}authentication/session?api_key=${api_key}`,
     {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        method: 'POST',
+        method: 'DELETE',
         body:  JSON.stringify({
             session_id
         })
@@ -65,7 +65,7 @@ export const deleteSession = (session_id) => fetch(
 
 export const addToWatchlist = ({session_id, account_id, media_type, media_id, watchlist}) => {
     return fetch(
-    `https://api.themoviedb.org/3/account/${account_id}/watchlist?api_key=${api_key}&session_id=${session_id}`,
+    `${BASE_URL}account/${account_id}/watchlist?api_key=${api_key}&session_id=${session_id}`,
     {
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -82,7 +82,7 @@ export const addToWatchlist = ({session_id, account_id, media_type, media_id, wa
 
 export const markAsFavorite = ({session_id, account_id, media_type, media_id, favorite}) => {
     return fetch(
-    `https://api.themoviedb.org/3/account/${account_id}/favorite?api_key=${api_key}&session_id=${session_id}`,
+    `${BASE_URL}account/${account_id}/favorite?api_key=${api_key}&session_id=${session_id}`,
     {
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -98,16 +98,16 @@ export const markAsFavorite = ({session_id, account_id, media_type, media_id, fa
 }
 
 export const getWatchlist = ({session_id, account_id, media_type}) => fetch(
-    `https://api.themoviedb.org/3/account/${account_id}/watchlist/${media_type === 'movie' ? 'movies' : 'tv'}?api_key=${api_key}&session_id=${session_id}`
+    `${BASE_URL}account/${account_id}/watchlist/${media_type === 'movie' ? 'movies' : 'tv'}?api_key=${api_key}&session_id=${session_id}`
 )
     .then((res) => res.json())
-    .then((res) => res.results)
+    .then((res) => res.results.map((movie) => ({...movie, title: movie.title || movie.name})))
 
 export const getFavorites = ({session_id, account_id, media_type}) => fetch(
-    `https://api.themoviedb.org/3/account/${account_id}/favorite/${media_type === 'movie' ? 'movies' : 'tv'}?api_key=${api_key}&session_id=${session_id}`
+    `${BASE_URL}account/${account_id}/favorite/${media_type === 'movie' ? 'movies' : 'tv'}?api_key=${api_key}&session_id=${session_id}`
 )
     .then((res) => res.json())
-    .then((res) => res.results)
+    .then((res) => res.results.map((movie) => ({...movie, title: movie.title || movie.name})))
 
 export const getAccInfo = (sid) => fetch(`${BASE_URL}account?api_key=${api_key}&session_id=${sid}`)
     .then(response => response.json())
@@ -149,13 +149,22 @@ export const findPerson = (query) => fetch(`${BASE_URL}search/person?api_key=${a
     .then(response => response.json())
     .then(({results}) => results)
 
-export const getMoviesByTitle = (title) => fetch(`${BASE_URL}search/multi?query=${title}&api_key=${api_key}`)
+export const getMoviesByTitle = (title, mediaType = 'multi') => fetch(`${BASE_URL}search/${mediaType}?query=${title}&api_key=${api_key}`)
     .then(response => response.json())
-    .then(data => data.results)
+    .then(data => data.results?.map((movie) => ({...movie, title: movie.title || movie.name})))
 
-export const getMoviesById = (id, movieType) => fetch(`${BASE_URL}${movieType}/${id}?api_key=${api_key}`)
+export const getMoviesById = (id, media_type) => fetch(`${BASE_URL}${media_type}/${id}?api_key=${api_key}`)
     .then(response => response.json())
-    .then(response => ({...response, media_type: movieType, title: response.title || response.name}))
+    .then(response => {
+        console.log(response)
+        return ({...response, media_type, title: response.title || response.name})
+    })
+
+export const discoverMedia = ({ with_people, media_type = 'tv'}) => {
+    return fetch(`${BASE_URL}discover/${media_type}?api_key=${api_key}${with_people ?`&with_people=${with_people}` : ''}`)
+    .then(response => response.json())
+    .then(response => response.results)
+}
 
 export const getGenres = () => fetch(`${BASE_URL}genre/movie/list?api_key=${api_key}`)
     .then(response => response.json())

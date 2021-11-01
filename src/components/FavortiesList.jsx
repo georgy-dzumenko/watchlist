@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { getGenres } from './api';
-import { WatchlistElement } from './WatchlistElement';
+import { FavoritesListElement } from './FavoritesListElement';
 
 const classNames = require('classnames');
 
-export const WatchlistList = ({moviesList, media_type}) => {
+export const FavortiesList = ({moviesList, media_type}) => {
   const slider = useRef(null);
   const [genres, setGenres] = useState([]);
 
@@ -15,7 +15,7 @@ export const WatchlistList = ({moviesList, media_type}) => {
   return (
     <div className="watchlist__list">
       {moviesList?.map((movie) => (
-        <WatchlistElement key={Math.random()}movie={movie} media_type={media_type} genres={genres}/>
+        <FavoritesListElement key={Math.random()} movie={movie} media_type={media_type} genres={genres}/>
       ))}
     </div>
   )

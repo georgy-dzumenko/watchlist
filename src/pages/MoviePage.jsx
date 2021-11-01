@@ -7,9 +7,10 @@ import AddToWatchListButton from '../components/AddToWatchListButton';
 import { motion } from 'framer-motion';
 import { connect } from 'react-redux';
 import MarkAsFavoriteButton from '../components/MarkAsFavoriteButton';
+import { Picture } from '../components/Picture';
 
 const MoviePage = ({accInfo}) => {
-  const match = useRouteMatch("/:movieType/:movieId");
+  const match = useRouteMatch("/:mediaType/:mediaId");
   const [cast, setCast] = useState([])
   const [trailer, setTrailer] = useState([])
   const [crew, setCrew] = useState([])
@@ -17,17 +18,19 @@ const MoviePage = ({accInfo}) => {
   const [similar, setSimilar] = useState([]);
   const [reviews, setReviews] = useState([]);
   const location = useLocation();
+  const mediaType = match.params.mediaType
+  const mediaId = match.params.mediaId
 
   // console.log(accInfo)
 
   useEffect(() => {
-    getTrailer(match.params.movieId, match.params.movieType).then((response) => { setTrailer(response[0]?.key) })
-    getCrew(match.params.movieId, match.params.movieType).then((response) => { setCrew(response.reverse()) })
-    getCredits(match.params.movieId, match.params.movieType).then((response) => { setCast(response.reverse()) })
-    getMoviesById(match.params.movieId, match.params.movieType).then((response) => { setMovie(response) })
-    getSimilar(match.params.movieId, match.params.movieType).then((response) => { setSimilar(response) })
-    getReviews(match.params.movieId, match.params.movieType).then((response) => { setReviews(response) })
-  }, [location.pathname, match.params.movieId, match.params.movieType])
+    getTrailer(mediaId, mediaType).then((response) => { setTrailer(response[0]?.key) })
+    getCrew(mediaId, mediaType).then((response) => { setCrew(response.reverse()) })
+    getCredits(mediaId, mediaType).then((response) => { setCast(response.reverse()) })
+    getMoviesById(mediaId, mediaType).then((response) => { setMovie(response) })
+    getSimilar(mediaId, mediaType).then((response) => { setSimilar(response) })
+    getReviews(mediaId, mediaType).then((response) => { setReviews(response) })
+  }, [location.pathname, mediaId, mediaType])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,7 +47,9 @@ const MoviePage = ({accInfo}) => {
               transition={{ duration: 0.5}}
               className="movie-page__poster grid__item--1-4"
             >
-              <img src={getMovieImg(movie.poster_path)} alt="" className="movie-page__poster-img" />
+              <div className="movie-page__poster-img">
+                <Picture mediaType={mediaType} picture_path={movie.poster_path}/>
+              </div>
             </motion.div>
             <div className="page__description grid__item--5-12 grid--desktop">
               <motion.div
@@ -85,15 +90,15 @@ const MoviePage = ({accInfo}) => {
                     {!!accInfo.username
                       &&
                         <AddToWatchListButton
-                          media_id={match.params.movieId}
-                          media_type={match.params.movieType}
+                          media_id={mediaId}
+                          media_type={mediaType}
                         />
                     }
                     {!!accInfo.username
                       &&
                         <MarkAsFavoriteButton
-                          media_id={match.params.movieId}
-                          media_type={match.params.movieType}
+                          media_id={mediaId}
+                          media_type={mediaType}
                         />
                     }
                   </div>

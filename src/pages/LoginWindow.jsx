@@ -12,7 +12,6 @@ const classNames = require('classnames')
 
 const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cleanWatchlist, updateWatchlist}) => {
   const location = useLocation()
-  const [token, setToken] = useState('');
   const [userData, setUserData] = useState({username: '', password: ''});
   const [loading, setLoading] = useState(false);
   const [isLogged, setLogged] = useState(!!session_id)
@@ -33,12 +32,10 @@ const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cl
         if(!session_id) {
           setLoading(true);
           createToken().then((tockenRes) => {
-            setToken(tockenRes.request_token)
-  
             createSessionWithLogin(
               userData.username,
               userData.password,
-              token
+              tockenRes.request_token,
             )
               .then((res) => {
                 createSession(res.request_token)
@@ -113,16 +110,33 @@ const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cl
                   id="password"
                   className="login__field"
                 />
-                <button onClick={() => setErr('')} type="submit" className="login__submit-button" >accept</button>
+                <button
+                  onClick={() => setErr('')}
+                  type="submit"
+                  className="login__submit-button"
+                >
+                  accept
+                </button>
               </>
             }
           </>
         :
           <>
-            <button onClick={() => history.push({hash: '#'})} type="submit" className="login__log-out-button" >Log out</button>
+            <button
+              onClick={() => history.push({hash: '#'})}
+              type="submit"
+              className="login__log-out-button"
+            >
+              Log out
+            </button>
           </>
       }
       <a onClick={() => history.push({hash: '#'})} className="login__close-button"></a>
+      {!isLogged &&
+        <span className="login__sign-up-field">
+          Don't have an account? <a href="https://www.themoviedb.org/signup" className="login__sign-up-link">Sign up!</a>
+        </span>
+      }
     </form>
   )
 }

@@ -53,7 +53,7 @@
   }
 
   &__poster {
-    display: block;
+    display: flex;
     position: relative;
     padding-bottom: 150%;
     object-fit: cover;
@@ -61,6 +61,7 @@
   }
 
   &__poster-img {
+    background-color: $c-light-gray;
     width: 100%;
     position: absolute;
     top: 0;

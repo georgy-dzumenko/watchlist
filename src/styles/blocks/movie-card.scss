@@ -11,7 +11,7 @@
 
   width: 200px;
   height: 300px;
-  background-color: #000;
+  background-color: $c-light-gray;
   transition: all 0.2s ease;
 
   margin: 10px;
@@ -20,11 +20,10 @@
     margin-right: $description-max-width;
   }
 
-  &__img {
+  &__img-container {
     position: relative;
     height: 100%;
     width: 100%;
-    object-fit: cover;
   }
 
   &__description {

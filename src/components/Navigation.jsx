@@ -60,7 +60,14 @@ const Navigation = ({session_id}) => {
               }
             </div>
           </HashLink>
-          <img src={getPersonImg(accInfo?.avatar?.tmdb?.avatar_path)} alt="" className="navigation__avatar"/>
+          {session_id ?
+            <img
+              src={getPersonImg(accInfo?.avatar?.tmdb?.avatar_path)}
+              alt=""
+              className="navigation__avatar"
+            />
+            : ''
+          }
         </div>
       </div>  
     </div>

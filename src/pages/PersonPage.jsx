@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useRouteMatch } from 'react-router-dom';
 import { getPerson, getPersonImg, getPersonsCredits } from '../components/api';
 import {MoviesSlider} from '../components/MoviesSlider'
+import { Picture } from '../components/Picture';
 
 export const PersonPage = () => {
-  const match = useRouteMatch("/people/:personId");
+  const match = useRouteMatch("/person/:personId");
   const [credits, setCredits] = useState([]);
   const [person, setPerson] = useState({})
   const location = useLocation();
@@ -19,7 +20,7 @@ export const PersonPage = () => {
       <div className="container">
         <div className="person-page grid">
           <div className="person-page__poster grid__item--1-4">
-            <img src={getPersonImg(person.profile_path)} className="person-page__poster-img" alt=""></img>
+            <Picture mediaType='person' picture_path={person.profile_path}/>
           </div>
           <div className="grid__item--5-12">
             <h1 className="person-page__name">

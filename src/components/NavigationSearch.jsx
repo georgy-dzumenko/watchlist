@@ -5,6 +5,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import debounce from 'lodash.debounce'
 import { getMovieImg, getMoviesByTitle } from './api'
 import { Link } from 'react-router-dom'
+import { Picture } from './Picture'
 
 const classNames = require("classnames")
 
@@ -67,19 +68,25 @@ export const NavigationSearch = () => {
               {
                 results.map(result => (
                   <li key={result.id}>
-                    <Link to={`/${result.media_type}/${result.id}`} className="navigation__search-result">
-                      <img src={getMovieImg(result.poster_path, true)} alt="" className="navigation__search-result-img" />
-                      <h2 className="navigation__search-result-title">
-                        {result.title}
-                      </h2>
-                    </Link>
+                    {
+                      <Link to={`/${result.media_type}/${result.id}`} className="navigation__search-result">
+                        <div className="navigation__search-result-img">
+                          <Picture mediaType={result.media_type} picture_path={result.profile_path || result.poster_path} w500/>
+                        </div>
+                        <h2 className="navigation__search-result-title">
+                          {result.title}
+                        </h2>
+                      </Link>
+                    }
                   </li>
                 ))
               }
               {
                 results.length > 0 ?
-                  <li key={"end"} className="navigation__search-more-results">
-                    more results...
+                  <li key={"end"}>
+                    <Link to="/search" className="navigation__search-more-results">
+                      more results...
+                    </Link>
                   </li>
                 :
                   <li key={"end"} className="navigation__search-no-results">

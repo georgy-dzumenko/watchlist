@@ -28,11 +28,13 @@ export const SearchPageCheckbox = ({text, list}) => {
     <div className="checkbox">
       <div
         onClick={() => { open(!isOpened) }}
-        className={classNames("checkbox__options-switcher", {"checkbox__options-switcher--active": isOpened})}
+        className="checkbox__options-switcher"
       >
-        {text}
+        <div className={classNames("checkbox__options-switcher-text", {"checkbox__options-switcher-text--active": isOpened})}>
+          {text}
+        </div>
       </div>
-      <div className={classNames("checkbox__options-block", {"checkbox__options-block--active": isOpened})}>
+      <div className={"checkbox__options-block"}>
         {
           list.map(({id, name}) => (
             <div

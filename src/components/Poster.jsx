@@ -53,7 +53,7 @@ export const Poster = ({moviesList}) => {
       onSwiper={(swiper) => console.log(swiper)}
     >
         {moviesList?.map((movie) => (
-          <SwiperSlide>
+          <SwiperSlide key={movie.id}>
             <div className="poster">
               <Link to={`${movie.media_type}/${movie.id}`}>
                 <img src={getMovieImg(movie.backdrop_path)} className="poster__img" alt=""/>

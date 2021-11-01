@@ -5,6 +5,7 @@ import { cleanAccInfo, setSessionId, updateAccInfo, updateFavoritesList } from '
 import { WatchlistList } from '../components/WatchlistList';
 import { useRouteMatch } from 'react-router';
 import { FavoritesTab } from '../components/FavoritesTab';
+import { FavortiesList } from '../components/FavortiesList';
 
 const classNames = require('classnames')
 
@@ -22,8 +23,8 @@ const Favorites = ({session_id, favorites, updateFavoritesList}) => {
             <FavoritesTab title="movies" titleInUrl="movie"/>
           </div>
           {match?.params?.mediaType === 'movie'
-            ? <WatchlistList moviesList={favorites.movie?.map((movie) => ({...movie, media_type: 'movie'}))} media_type="movie"/>
-            : <WatchlistList moviesList={favorites.tv?.map((movie) => ({...movie, media_type: 'tv'}))} media_type="tv"/>
+            ? <FavortiesList moviesList={favorites.movie?.map((movie) => ({...movie, media_type: 'movie'}))} media_type="movie"/>
+            : <FavortiesList moviesList={favorites.tv?.map((movie) => ({...movie, media_type: 'tv'}))} media_type="tv"/>
           }
         </div>
       </div>

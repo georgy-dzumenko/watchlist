@@ -218,6 +218,8 @@
   &__search-result {
     cursor: pointer;
     display: flex;
+    color: #000;
+    text-decoration: none;
     width: 100%;
     box-sizing: border-box;
     height: 90px;
@@ -256,8 +258,9 @@
 
   &__search-result-img {
     transition: all 1s ease;
-    background: #000;
-    display: block;
+    background: $c-light-gray;
+    display: flex;
+    align-content: center;
     object-position: left;
     height: 100%;
     width: 60px;

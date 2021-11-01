@@ -1,6 +1,7 @@
 import React from 'react'
 import { getMovieImg } from './api'
 import { useHistory } from 'react-router';
+import { Picture } from './Picture';
 
 const classNames = require("classnames");
 
@@ -16,14 +17,22 @@ export const MovieCard = ({ last = false, movie, genres}) => {
         window.location.reload()
       }}
     >
-      <img src={getMovieImg(movie?.poster_path, true)} alt="" className="movie-card__img" />
+
+      <div className="movie-card__img-container">
+        <Picture picture_path={movie?.poster_path} w500/>
+      </div>
       <div className="movie-card__description">
-        <img className="movie-card__description-img" src={getMovieImg(movie.backdrop_path, true)} alt="" />
+        {movie.backdrop_path
+          ?
+            <img className="movie-card__description-img" src={getMovieImg(movie.backdrop_path, true)} alt="" />
+          :
+            ''
+        }
         <div className="movie-card__description-content">
           <h1 className="movie-card__description-title">{movie?.title}</h1>
           <ul className="movie-card__description-ganres-list">
             {movie.genre_ids?.map((genreId) =>
-              <li className="movie-card__description-ganre">
+              <li key={genreId} className="movie-card__description-ganre">
                 {genres.find(({id}) => genreId === id)?.name}
               </li>
             )}

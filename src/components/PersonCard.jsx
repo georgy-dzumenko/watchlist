@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { getMovieImg } from './api'
 import avatarAnim from '../lottie/avatar.json'
+import { Picture } from './Picture';
 
 const classNames = require("classnames");
 
@@ -25,15 +26,12 @@ export const PersonCard = ({person}) => {
   }, [])
   return (
     <Link
-      to={`/people/${person.id}`}
+      to={`/person/${person.id}`}
       onMouseOver={() => lottieAnim?.play()}
       onMouseLeave={() => lottieAnim?.stop()}
       className={classNames("person-card")}
     >
-      {person.profile_path ?
-        <img src={getMovieImg(person.profile_path, true)} alt="" className="person-card__img"/>
-        : <div className="person-card__empty-avatar" ref={avatar}></div>
-      }
+      <Picture mediaType="person" picture_path={person.profile_path} w500/>
       <div className="person-card__job">
         {person.job || person.character}
       </div>

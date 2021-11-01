@@ -39,8 +39,8 @@ function App() {
         <Route path="/info">
           <Info/>
         </Route>
-        <Route path="/people/:personId" exact>
-          <PersonPage id={match?.params?.personId}/>
+        <Route path="/person/:personId" exact>
+          <PersonPage key={Math.random()} id={match?.params?.personId}/>
         </Route>
         <Route path="/watchlist/:mediaType" exact>
           <WatchlistPage/>

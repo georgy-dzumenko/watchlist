@@ -19,7 +19,6 @@ export const MoviesSlider = ({moviesList = [], peopleList = []}) => {
     <div
       className={classNames("movies-slider", {"movies-slider--disabled": [...moviesList, ...peopleList].length === 0})}
     >
-      {/* <img src={bannerMovie} className="movies-slider__banner"></img> */}
       <div
         onClick={() => {
           slider.current.scrollBy({
@@ -37,13 +36,13 @@ export const MoviesSlider = ({moviesList = [], peopleList = []}) => {
       >
         <div className="movies-slider__content">
           {peopleList.map((person) => (
-            <div>
-              <PersonCard person={person} />
+            <div key={person.id}>
+              <PersonCard key={person.id} person={person} />
             </div>
           ))}
           {!!moviesList ? moviesList?.map((movie, index) => (
-            <div>
-              <MovieCard last={index === 0} movie={movie} genres={genres}/>
+            <div key={movie.id}>
+              <MovieCard key={movie.id} last={index === 0} movie={movie} genres={genres}/>
             </div>
           )) : ''}
         </div>
