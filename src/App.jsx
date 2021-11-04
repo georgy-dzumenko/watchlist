@@ -8,12 +8,11 @@ import { CollectionPage } from './pages/CollectionPage';
 import { PersonPage } from './pages/PersonPage';
 import {Switch} from 'react-router'
 import { SearchPage } from './pages/SearchPage';
-import { useEffect, useState } from 'react';
-import { getAccInfo } from './components/api';
 import LoginWindow from './pages/LoginWindow';
 import Navigation from './components/Navigation'
 import WatchlistPage from './pages/WatchlistPage';
 import FavoritesPage from './pages/FavoritesPage';
+import ListsPage from './pages/ListsPage';
 
 function App() {
   const match = useRouteMatch('/:mediaType/:mediaId')
@@ -48,6 +47,9 @@ function App() {
         <Route path="/favorites/:mediaType" exact>
           <FavoritesPage/>
         </Route>
+        {/* <Route path="/lists/:listId?" exact>
+          <ListsPage/>
+        </Route> */}
         <Route path="/:mediaId/:mediaId" exact>
           {match?.params?.mediaType !== 'collections'
             ?

@@ -1,5 +1,5 @@
-import { getAccInfo, getFavorites, getMoviesById, getWatchlist } from "../components/api"
-import { CLEAN_ACCINFO, CLEAN_FAVORITES, CLEAN_WATCHLIST, GET_WATCHLIST, SET_SESSION_ID, UPDATE_ACCINFO, UPDATE_FAVORITES, UPDATE_WATCHLIST } from "./types"
+import { getAccInfo, getFavorites, getLists, getMoviesById, getWatchlist } from "../components/api"
+import { CLEAN_ACCINFO, CLEAN_FAVORITES, CLEAN_WATCHLIST, GET_WATCHLIST, SET_SESSION_ID, UPDATE_ACCINFO, UPDATE_FAVORITES, UPDATE_LISTS, UPDATE_WATCHLIST } from "./types"
 
 export const setSessionId = (session_id) => {
   localStorage.setItem('session', session_id)
@@ -60,6 +60,20 @@ export const updateFavoritesList = (session_id) => {
           payload: {movie: response, tv: res},
         }))
       }))
+    })
+  }
+}
+
+export const updateLists = (session_id) => {
+  return dispatch => {
+    getAccInfo(session_id).then((account) => {
+      getLists(session_id, account.id).then((res) => {
+        localStorage.setItem('lists', JSON.stringify(res))
+        return (dispatch({
+          type: UPDATE_LISTS,
+          payload: res,
+        }))
+      })
     })
   }
 }

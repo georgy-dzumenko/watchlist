@@ -11,15 +11,13 @@ const MarkAsFavoriteButton = ({session_id, accInfo, media_id, media_type, favori
   const [theFirstPlay, setTheFirstPlay] = useState(true);
   const animation = useRef(null)
 
-  console.log(active)
-
   useEffect(() => {
     setLottieAnim(lottie.loadAnimation({
       container: animation.current,
       renderer: 'svg',
       loop: false,
       autoplay: false,
-      animationData: favorite
+      animationData: favorite,
     }))
     if(lottieAnim.setSpeed) {
       lottieAnim?.setSpeed(2.5)
@@ -29,11 +27,9 @@ const MarkAsFavoriteButton = ({session_id, accInfo, media_id, media_type, favori
   useEffect(() => {
     if(lottieAnim.playSegments && theFirstPlay) {
       if(active) {
-        console.log('active')
         lottieAnim.playSegments([0, 1], true)
       } else {
-        console.log('not active')
-        lottieAnim.playSegments([131, 132], true)
+        lottieAnim.playSegments([33, 34], true)
       }
       setTheFirstPlay(false)
     }
@@ -44,7 +40,7 @@ const MarkAsFavoriteButton = ({session_id, accInfo, media_id, media_type, favori
       if(active) {
         lottieAnim?.playSegments([0, 1], true)
       } else {
-        lottieAnim?.playSegments([61, 131], true)
+        lottieAnim?.playSegments([0, 34], true)
       }
     }
   }, [active])
@@ -58,7 +54,7 @@ const MarkAsFavoriteButton = ({session_id, accInfo, media_id, media_type, favori
             updateFavoritesList(session_id)
           })
       }}
-      className="addToWatchListButton"
+      className="mark-as-favorite"
       ref={animation}
     >
     </div>

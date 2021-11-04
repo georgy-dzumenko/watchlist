@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { connect } from 'react-redux';
 import MarkAsFavoriteButton from '../components/MarkAsFavoriteButton';
 import { Picture } from '../components/Picture';
+import AddToListButton from '../components/AddToListButton';
 
 const MoviePage = ({accInfo}) => {
   const match = useRouteMatch("/:mediaType/:mediaId");
@@ -62,7 +63,7 @@ const MoviePage = ({accInfo}) => {
                   {movie?.title}
                 </div>
                 <div className="movie-page__votes grid__item--1-12">
-                  imdb: <span className="movie-page__votes-value">{movie?.vote_average}</span>
+                  rating: <span className="movie-page__votes-value">{movie?.vote_average}</span>
                 </div>
                 <div className="movie-page__overview grid__item--1-12">
                   {movie.overview}
@@ -97,6 +98,13 @@ const MoviePage = ({accInfo}) => {
                     {!!accInfo.username
                       &&
                         <MarkAsFavoriteButton
+                          media_id={mediaId}
+                          media_type={mediaType}
+                        />
+                    }
+                    {!!accInfo.username
+                      &&
+                        <AddToListButton
                           media_id={mediaId}
                           media_type={mediaType}
                         />

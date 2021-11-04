@@ -7,7 +7,7 @@ import { FilterVisibilityToggler } from '../components/FilterVisibilityToggler';
 import Lottie from 'lottie-web';
 import search from '../lottie/search.json'
 import { useHistory, useLocation } from 'react-router';
-import { MovieCard } from "../components/MovieCard";
+import MovieCard from "../components/MovieCard";
 
 export const SearchPage = () => {
   const location = useLocation();

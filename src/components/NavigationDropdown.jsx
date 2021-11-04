@@ -31,6 +31,11 @@ export const NavigationDropdown = ({text}) => {
               favorites
             </div>
           </Link>
+          <Link to='/lists'className="navigation__dropdown-option">
+            <div className="navigation__link-text">
+              lists
+            </div>
+          </Link>
         </div>
       </div>
     </>

@@ -1,0 +1,20 @@
+.mark-as-favorite {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  &__lottie {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: -10px;
+    padding: 0;
+    object-fit: contain;
+    object-position: center;
+  }
+}

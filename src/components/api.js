@@ -1,6 +1,57 @@
 const BASE_URL = "https://api.themoviedb.org/3/";
 const api_key = "a1cacae9e097c731c0046cf30fa3b749";
 
+export const createList = (name, description, session_id) => fetch(
+    `${BASE_URL}list?api_key=${api_key}&session_id=${session_id}`,
+    {
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            name,
+            description,
+            // language,
+        })
+    }    
+)
+
+export const removeMovieFromList = (list_id, movie_id, session_id) => fetch(
+    `${BASE_URL}list/${list_id}/remove_item?api_key=${api_key}&session_id=${session_id}`,
+    {
+        method: 'POST',
+        body: {
+            movie_id
+        }
+    }    
+)
+
+export const addMovieToList = (list_id, media_id, session_id) => fetch(
+    `https://api.themoviedb.org/3/list/${list_id}/add_item?api_key=${api_key}&session_id=${session_id}`,
+    {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify({
+            media_id
+        })
+    }    
+)
+
+export const deleteList = (list_id, session_id) => fetch(
+    `${BASE_URL}list/${list_id}?api_key=${api_key}&session_id=${session_id}`,
+    {
+        method: 'DELETE',
+    }    
+)
+
+export const getLists = (session_id, account_id) => fetch(`${BASE_URL}account/${account_id}/lists?api_key=${api_key}&session_id=${session_id}`)
+    .then((res) => res.json())
+    .then((res) => res.results)
+
+export const getCreatedList = (list_id) => fetch(`${BASE_URL}list/${list_id}?api_key=${api_key}`).then((res) => res.json())
+
 export const getMoviesByYear = async (year, type = "movie") => {
     if(type === "multi") {
         return fetch(`${BASE_URL}discover/movie?year=${year}&api_key=${api_key}`)

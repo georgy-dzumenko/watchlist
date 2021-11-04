@@ -1,19 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { MovieCard } from './MovieCard';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getGenres } from './api';
 import { PersonCard } from './PersonCard';
+import MovieCard from './MovieCard';
 
 const classNames = require('classnames');
 
 export const MoviesSlider = ({moviesList = [], peopleList = []}) => {
   const slider = useRef(null);
-  const [genres, setGenres] = useState([]);
-
-  useEffect(() => {
-    getGenres().then((response) => setGenres(response));
-  }, [])
 
   return (
     <div
@@ -42,7 +36,7 @@ export const MoviesSlider = ({moviesList = [], peopleList = []}) => {
           ))}
           {!!moviesList ? moviesList?.map((movie, index) => (
             <div key={movie.id}>
-              <MovieCard key={movie.id} last={index === 0} movie={movie} genres={genres}/>
+              <MovieCard key={movie.id} last={index === 0} movie={movie} />
             </div>
           )) : ''}
         </div>

@@ -1,0 +1,30 @@
+.lists-page {
+  &__select-section {
+    min-height: 100vh;
+    background-color: $c-light-red;
+  }
+
+  &__list-option {
+    display: flex;
+    height: 40px;
+    border:2px solid $c-light-gray;
+    color: #fff;
+    font-size: large;
+    align-content: center;
+    align-items: center;
+    padding-left: 10px;
+    background-color: $c-red;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateX(20px);
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+
+  }
+}

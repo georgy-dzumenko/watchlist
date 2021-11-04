@@ -36,7 +36,6 @@ export const NavigationSearch = () => {
           onChange={(event) => {
             setText(event.target.value)
             onSearch(event.target.value)
-            console.log("a");
           }}
           onBlur={() => setActive(false)}
           className={

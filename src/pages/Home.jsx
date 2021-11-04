@@ -16,8 +16,6 @@ const Home = ({accInfo}) => {
       .then((result) => setNewMovies(result))
     getMoviesByYear("2021", 'tv')
       .then((result) => setNewTv(result))
-    // console.log(moviesOnPoster)
-    
   }, [])
 
   return (

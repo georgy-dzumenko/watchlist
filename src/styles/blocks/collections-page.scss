@@ -17,6 +17,8 @@
   }
 
   &__part {
+    cursor: pointer;
+    position: relative;
     margin: 10px 0;
     border-bottom: 3px solid $c-light-red;
     transition: all 0.5s ease;
@@ -27,4 +29,10 @@
     }
   }
 
+  &__actions-block {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+  }
 }

@@ -51,12 +51,12 @@ const AddToWatchListButton = ({session_id, accInfo, media_id, media_type, watchl
 
   return (
     <div
-      onClick={() => {
+    onClick={() => {
         setActive(!active)
         addToWatchlist({session_id, account_id: accInfo.id, media_type, media_id, watchlist: active})
-          .then(() => {
-            updateWatchlist(session_id)
-          })
+        .then(() => {
+          updateWatchlist(session_id)
+        })
       }}
       className="addToWatchListButton"
       ref={animation}
