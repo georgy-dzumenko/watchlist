@@ -11,6 +11,7 @@ import { Picture } from '../components/Picture';
 import AddToListButton from '../components/AddToListButton';
 
 const MoviePage = ({accInfo}) => {
+  console.log('перейшов')
   const match = useRouteMatch("/:mediaType/:mediaId");
   const [cast, setCast] = useState([])
   const [trailer, setTrailer] = useState([])
@@ -18,7 +19,7 @@ const MoviePage = ({accInfo}) => {
   const [movie, setMovie] = useState({});
   const [similar, setSimilar] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const location = useLocation();
+  // const location = useLocation();
   const mediaType = match.params.mediaType
   const mediaId = match.params.mediaId
 
@@ -31,10 +32,10 @@ const MoviePage = ({accInfo}) => {
     getMoviesById(mediaId, mediaType).then((response) => { setMovie(response) })
     getSimilar(mediaId, mediaType).then((response) => { setSimilar(response) })
     getReviews(mediaId, mediaType).then((response) => { setReviews(response) })
-  }, [location.pathname, mediaId, mediaType])
+  }, [mediaId, mediaType])
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }, [match])
 
   return (
@@ -59,16 +60,16 @@ const MoviePage = ({accInfo}) => {
                 transition={{ duration: 0.7}}
                 className="grid"
               >
-                <div className="grid__item--1-12 page__title movie-page__title">
+                <div key="poster" className="grid__item--1-12 page__title movie-page__title">
                   {movie?.title}
                 </div>
-                <div className="movie-page__votes grid__item--1-12">
+                <div key="selected-movie-description" className="movie-page__votes grid__item--1-12">
                   rating: <span className="movie-page__votes-value">{movie?.vote_average}</span>
                 </div>
-                <div className="movie-page__overview grid__item--1-12">
+                <div key="selected-movie-overview" className="movie-page__overview grid__item--1-12">
                   {movie.overview}
                 </div>
-                <div className="movie-page__genres-list grid__item-1-12">
+                <div key="selected-movie-genres" className="movie-page__genres-list grid__item-1-12">
                   {movie.genres?.map(({name}) =>
                     <div className="movie-page__genre">
                       {name}
@@ -76,14 +77,14 @@ const MoviePage = ({accInfo}) => {
                   )}
                 </div>
                 {movie.belongs_to_collection &&
-                  <div className="grid__item--1-12">
+                  <div key="selected-movie-collection" className="grid__item--1-12">
                     collection:
                     <Link className="movie-page__action-title-link" to={`/collections/${movie.belongs_to_collection.id}`}>
                       {movie.belongs_to_collection.name}
                     </Link>
                   </div>
                 }
-                <div className="grid__item--1-12">
+                <div key="selected-movie-action-buttons" className="grid__item--1-12">
                   <div className="movie-page__action">
                     <div className="movie-page__activon-title">
                       Add to/remove from <Link to={`/watchlist/${match.params.movieType}`} className="movie-page__action-title-link">watchlist</Link>
@@ -162,7 +163,7 @@ const MoviePage = ({accInfo}) => {
                   <div className="page__title">
                    Cast
                   </div>
-                  <MoviesSlider peopleList={cast} />
+                  <MoviesSlider key="cast-slider" peopleList={cast} />
                 </>
               : ''
             }
@@ -172,7 +173,7 @@ const MoviePage = ({accInfo}) => {
                   <div className="page__title">
                     Crew
                   </div>
-                  <MoviesSlider peopleList={crew} />
+                  <MoviesSlider key="crew-slider" peopleList={crew} />
                 </>
               : ''
             }
@@ -181,7 +182,7 @@ const MoviePage = ({accInfo}) => {
             <div className="page__title">
               Similar
             </div>
-            <MoviesSlider moviesList={similar} />
+            <MoviesSlider key="similar-slider" moviesList={similar} />
           </section>
         </div>
       </div>

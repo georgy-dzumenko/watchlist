@@ -17,7 +17,7 @@ const MarkAsFavoriteButton = ({session_id, accInfo, media_id, media_type, favori
       renderer: 'svg',
       loop: false,
       autoplay: false,
-      animationData: favorite,
+      animationData: JSON.parse(JSON.stringify(favorite)),
     }))
     if(lottieAnim.setSpeed) {
       lottieAnim?.setSpeed(2.5)

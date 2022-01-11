@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { HashLink } from 'react-router-hash-link'
 import { useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion';
 
 const classNames = require("classnames")
 

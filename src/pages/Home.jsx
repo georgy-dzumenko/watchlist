@@ -33,7 +33,6 @@ const Home = ({accInfo}) => {
             <Poster moviesList={moviesOnPoster}/>
           </main>
         </section>
-
         <section className="page__section">
           <div className="page__title">
             Newest tv shows

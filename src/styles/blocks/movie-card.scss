@@ -34,6 +34,7 @@
   }
 
   &__description {
+    width: var(--description-width);
     background-color: #fff;
     order: 1;
     overflow: hidden;
@@ -42,7 +43,6 @@
     transition: width 1s cubic-bezier(0,1.09,.2,.98), border-right 0.5s cubic-bezier(1,-0.06,.42,.95);
     border: var(--description-boder-width) solid $c-gray;
     border-right: var(--description-boder-right-width) solid $c-red;
-    width: var(--description-width);
     left: 0;
     right: 100%;
     top: 0;
@@ -100,8 +100,8 @@
   }
   
   &:hover {
-    --description-boder-width: 1px;
     --description-width: #{$description-max-width};
+    --description-boder-width: 1px;
     --description-boder-right-width: 60px;
     
     @include onMobile() {

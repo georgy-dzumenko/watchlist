@@ -22,7 +22,7 @@ const AddToListButton = ({session_id, accInfo, lists, media_id, media_type, watc
       renderer: 'svg',
       loop: false,
       autoplay: false,
-      animationData: addToListLottie
+      animationData: JSON.parse(JSON.stringify(addToListLottie))
     }))
     if(lottieAnim.setSpeed) {
       lottieAnim?.setSpeed(2.5)

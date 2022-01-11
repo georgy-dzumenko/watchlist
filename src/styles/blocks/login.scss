@@ -1,21 +1,40 @@
 .login {
-  box-sizing: border-box;
   z-index: 20;
-  background: #fff;
-  right: 50%;
-  top: 40vh;
+
   position: fixed;
-  margin: 0 auto;
-  width: 400px;
-  height: max-content;
-  border: 2px solid $c-gray;
-  flex-direction: column;
-  transition: all 0.2s ease;
-  display: flex;
-  transform: translate(50%, -50%) scale(0);
-  opacity: 0;
-  padding: 10px;
-  border-radius: 10px;
+  display: none;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.39);
+  box-sizing: border-box;
+
+  &__container {
+    z-index: 20;
+    background: #fff;
+    right: 50%;
+    top: 40vh;
+    position: fixed;
+    margin: 0 auto;
+    width: 400px;
+    height: max-content;
+    border: 2px solid $c-gray;
+    flex-direction: column;
+    transition: all 0.2s ease;
+    display: flex;
+    transform: translate(50%, -50%) scale(0);
+    opacity: 0;
+    padding: 10px;
+    border-radius: 10px;
+    @include onMobile() {
+      width: 90%;
+      height: max-content;
+      
+    }
+    transform:  translate(50%, -50%) scale(100%);
+    opacity: 1;
+  }
 
   &__sign-up-field {
     display: block;
@@ -68,15 +87,7 @@
   }
 
   &--active {
-    @include onMobile() {
-      width: 90%;
-      height: max-content;
-      
-    }
-
-    transform:  translate(50%, -50%) scale(100%);
-    opacity: 1;
-    box-shadow: 0px 15px 31px 1000px rgba(0, 0, 0, 0.527);
+    display: block;
   }
 
   &__title {

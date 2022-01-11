@@ -20,7 +20,7 @@ const AddToWatchListButton = ({session_id, accInfo, media_id, media_type, watchl
       renderer: 'svg',
       loop: false,
       autoplay: false,
-      animationData: addButton
+      animationData: JSON.parse(JSON.stringify(addButton))
     }))
     if(lottieAnim.setSpeed) {
       lottieAnim?.setSpeed(2.5)
@@ -51,7 +51,7 @@ const AddToWatchListButton = ({session_id, accInfo, media_id, media_type, watchl
 
   return (
     <div
-    onClick={() => {
+      onClick={() => {
         setActive(!active)
         addToWatchlist({session_id, account_id: accInfo.id, media_type, media_id, watchlist: active})
         .then(() => {

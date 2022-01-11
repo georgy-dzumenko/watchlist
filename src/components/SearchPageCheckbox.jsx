@@ -46,7 +46,7 @@ export const SearchPageCheckbox = ({text, list}) => {
                 selectNewOption(id)
               }}
               className={classNames(["checkbox__option", {"checkbox__option--active": searchParams.get(text)?.split(',').some((optionId) => +optionId === id)}])}
-              key="id"
+              key={id}
             >
               {name}
             </div>

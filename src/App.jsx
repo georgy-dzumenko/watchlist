@@ -27,7 +27,6 @@ function App() {
   return (
     <div className="App">
       <Navigation/>
-      <LoginWindow/>
       <Switch>
         <Route name="app" path="/" exact>
           <Home/>
@@ -47,19 +46,20 @@ function App() {
         <Route path="/favorites/:mediaType" exact>
           <FavoritesPage/>
         </Route>
-        {/* <Route path="/lists/:listId?" exact>
+        <Route path="/lists/:listId?" exact>
           <ListsPage/>
-        </Route> */}
+        </Route>
         <Route path="/:mediaId/:mediaId" exact>
           {match?.params?.mediaType !== 'collections'
             ?
-            <MoviePage id={match?.params?.mediaId} key={Math.random()}/>
+            <MoviePage id={match?.params?.mediaId} key={`moviePage${match?.params?.mediaId}`}/>
             :
             <CollectionPage/>
           }
         </Route>
       </Switch>
       
+      <LoginWindow/>
       <Menu />
     </div>
   );

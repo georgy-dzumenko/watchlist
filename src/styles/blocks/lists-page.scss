@@ -1,4 +1,14 @@
 .lists-page {
+  &__title {
+    margin: 0;
+  }
+  
+  &__description {
+    color: $c-gray;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
   &__select-section {
     min-height: 100vh;
     background-color: $c-light-red;
@@ -7,7 +17,7 @@
   &__list-option {
     display: flex;
     height: 40px;
-    border:2px solid $c-light-gray;
+    border: 2px solid $c-light-gray;
     color: #fff;
     font-size: large;
     align-content: center;
@@ -17,9 +27,40 @@
     transition: all 0.3s ease;
     cursor: pointer;
 
-    &:hover {
-      transform: translateX(20px);
-    }
+    // &:hover {
+    //   transform: translateX(20px);
+    // }
+  }
+
+  &__delete-button {
+    display: block;
+    width: max-content;
+    padding: 1px 5px;
+    border-radius: 5px;
+    background-color: $c-red;
+    color: #fff
+  }
+
+  &__window {
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    position: fixed;
+    background-color: #fff;
+    border: 2px solid $c-light-gray;
+    width: 250px;
+    height: 150px;
+    z-index: 5;
+  }
+
+  &__window-button-block {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+
+  &__window-button {
+    
   }
 
   &__list {
