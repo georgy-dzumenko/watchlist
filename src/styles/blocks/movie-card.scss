@@ -10,9 +10,9 @@
   --description-boder-width: 0;
   cursor: pointer;
 
+
   width: 200px;
   height: 300px;
-  background-color: $c-light-gray;
   transition: all 0.2s ease;
 
   margin: 10px;
@@ -34,8 +34,9 @@
   }
 
   &__description {
+    background-color: rgba(255, 255, 255, 0.61);
+    backdrop-filter: blur(15px);
     width: var(--description-width);
-    background-color: #fff;
     order: 1;
     overflow: hidden;
     position: absolute;
@@ -56,7 +57,6 @@
   }
   
   &__description-content {
-    background-color: #fff;
     display: block;
     margin-left: 10px;
   }

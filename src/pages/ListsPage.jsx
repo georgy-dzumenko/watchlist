@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 
 import { useHistory, useRouteMatch } from 'react-router';
-import { getCreatedList } from '../components/api';
+import { deleteList, getCreatedList } from '../components/api';
 import ListElement from '../components/ListElement';
 import { motion, useAnimation } from 'framer-motion';
 import { ListSelector } from '../components/ListSelector';
+import { updateLists } from '../redux/actions';
 
 const classNames = require('classnames')
 
-const ListsPage = ({lists}) => {
+const ListsPage = ({lists, session_id, updateLists}) => {
   const history = useHistory();
   const match = useRouteMatch('/lists/:listId?')
   const [selectedList, selectList] = useState({});
@@ -48,15 +49,21 @@ const ListsPage = ({lists}) => {
                 <ListElement movie={movie}/>
               ))}
             </div>
-            <div className="lists-page__delete-button">
+            <div
+              onClick={() => {
+                deleteList(match.params.listId, session_id)
+                history.push('/lists/')
+                updateLists()
+              }}
+              className="lists-page__delete-button"
+            >
               delete the list
             </div>
           </div>
         </div>
       </div>
-      <div className="lists-page__window">dfsdfsdf</div>
     </div>
   )
 }
 
-export default connect((state) => ({session_id: state.session.session, lists: state.session.lists}), {})(ListsPage)
+export default connect((state) => ({session_id: state.session.session, lists: state.session.lists}), {updateLists})(ListsPage)

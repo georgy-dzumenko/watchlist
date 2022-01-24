@@ -25,7 +25,9 @@
 @import "./blocks/lists-page.scss";
 @import "./blocks/add-to-list-window.scss";
 @import "./blocks/list-card.scss";
-
+@import "./blocks/profile-settings.scss";
+@import "utils/vars";
+@import "utils/mixins";
 html {
   position: relative;
   margin: 0;
@@ -38,5 +40,6 @@ html {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: $c-light-gray;
+  background: radial-gradient(rgb(224, 37, 37), rgb(122, 0, 0));
+  
 }

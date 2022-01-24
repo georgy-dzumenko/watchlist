@@ -2,7 +2,9 @@
 @import "../utils/mixins";
 
 .navigation {
-
+  position: sticky;
+  top: 0;
+  z-index: 100;
   &__content {
     z-index: 5;
     position:relative;
@@ -14,7 +16,7 @@
     grid-template-rows: 100%;
     align-content: center;
     background: white;
-    box-shadow: 0 1px 3px $c-gray;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.158);
     transition: all 0.3s ease-in;
     padding: 0 30px;
     box-sizing: border-box;
@@ -54,7 +56,17 @@
     }
   }
 
+  &__avatar-container {
+    z-index: 110;
+    position: relative;
+    height: max-content;
+    width: max-content;
+  }
+
   &__avatar {
+    margin-left: 30px;
+    transform-origin: right top;
+    position: relative;
     height: 40px;
     width: 40px;
     border-radius: 50%;
@@ -172,7 +184,8 @@
 
   &__search-results-block {
     visibility: hidden;
-    background: #fff;
+    background: rgba(221, 221, 221, 0.685);
+    backdrop-filter: blur(10px);
     margin: 0;
     padding: 0;
     padding-bottom: 10px;
@@ -227,7 +240,6 @@
     border-top: 1px solid $c-gray;
     border-right: 0 solid $c-gray;
     transform-origin: left bottom;
-    background-color: #fff;
     
     transition: all 0.2s ease;
     
@@ -312,6 +324,9 @@
     position: relative;
     letter-spacing: -0.065em;
 
+    &--paddingless {
+      padding: 0 20px
+    }
     
     &:hover {
       background: $c-light-red;

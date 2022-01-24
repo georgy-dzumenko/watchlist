@@ -8,16 +8,13 @@ import { useLocation } from 'react-router'
 import { HashRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getAccInfo, getPersonImg } from './api'
-import { AnimateSharedLayout, motion } from 'framer-motion'
+import { AnimateSharedLayout, motion, useAnimation } from 'framer-motion'
 
-const Navigation = ({session_id}) => {
-  const [accInfo, setAccInfo] = useState({})
+const Navigation = ({accInfo}) => {
   const location = useLocation();
+  const menuAnimation = useAnimation();
+  const AvatarAnimation = useAnimation();
   console.log(location)
-
-  useEffect(() => {
-    getAccInfo(session_id).then((res) => setAccInfo(res))
-  }, [session_id])
 
   return (
     <div className="navigation">
@@ -40,7 +37,6 @@ const Navigation = ({session_id}) => {
             {location.pathname === '/' && <ActiveLine/>}
           </Link>
           <div className="navigation__main">
-            <NavigationDropdown text="film catalogue"/>
             <Link to="/info" className="navigation__link">
               <div className="navigation__link-text">
                 info
@@ -57,24 +53,66 @@ const Navigation = ({session_id}) => {
         </AnimateSharedLayout>
         <div className="navigation__right-side-block">
           <NavigationSearch></NavigationSearch>
-          <HashLink
-            to="#login"
-            className="navigation__link"
-          >
-            <div className="navigation__link-text">
-              {session_id
-                ? 'log out'
-                : 'log in'
-              }
-            </div>
-          </HashLink>
-          {session_id ?
-            <img
-              src={getPersonImg(accInfo?.avatar?.tmdb?.avatar_path)}
-              alt=""
-              className="navigation__avatar"
-            />
-            : ''
+          {!accInfo.id &&
+            <HashLink   
+              to="#login"
+              className="navigation__link--paddingless"
+            >
+              <div className="navigation__link-text">
+                log in
+              </div>
+            </HashLink>
+          }
+          {accInfo.id &&
+            <motion.div
+              className="navigation__avatar-container"
+              onHoverStart={() => {
+                menuAnimation.start({scale: '100%', opacity: 1})
+                AvatarAnimation.start({scale: '120%'})
+              }}
+              onHoverEnd={() => {
+                menuAnimation.start({scale: 0, opacity: 0})
+                AvatarAnimation.start({scale: '100%'})
+              }}
+            >
+              <motion.div
+                initial={{scale: 0, opacity: 0}}
+                className="profile-settings"
+                animate={menuAnimation}
+              >
+                <div className="profile-settings__header">
+                  {accInfo.username}
+                </div>
+                <div className="profile-settings__label">
+                  account
+                </div>
+                <Link to='/watchlist/tv'className="profile-settings__option">
+                    profile
+                </Link>
+                <HashLink to='#login'className="profile-settings__option">
+                    log out
+                </HashLink>
+                <div className="profile-settings__label">
+                  film catalogues
+                </div>
+                <Link to='/watchlist/tv'className="profile-settings__option">
+                    watchlist
+                </Link>
+                <Link to='/favorites/tv'className="profile-settings__option">
+                    favorites
+                </Link>
+                <Link to='/lists'className="profile-settings__option">
+                    lists
+                </Link>
+              </motion.div>
+              <motion.img
+                initial={{ scale: '100%' }}
+                animate={AvatarAnimation}
+                src={getPersonImg(accInfo?.avatar?.tmdb?.avatar_path)}
+                alt=""
+                className="navigation__avatar"
+              />
+            </motion.div>
           }
         </div>
       </div>  
@@ -100,4 +138,4 @@ function ActiveLine() {
   )
 }
 
-export default connect((state) => ({session_id: state.session.session}))(Navigation)
+export default connect((state) => ({accInfo: state.session.accInfo}))(Navigation)

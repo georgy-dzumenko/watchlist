@@ -93,6 +93,7 @@ const AddToListButton = ({session_id, accInfo, lists, media_id, media_type, watc
                     createList(newListData.name, newListData.description, session_id)
                     
                     updateLists(session_id)
+                    setNewActive(false);
                   }}>
                     <input
                       value={newListData.name}

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { createSession, createToken, deleteSession } from '../components/api';
 import { createSessionWithLogin, getAccInfo } from '../components/api';
-import { cleanAccInfo, setSessionId, updateAccInfo, cleanWatchlist, updateWatchlist } from '../redux/actions';
+import { cleanAccInfo, setSessionId, updateAccInfo, cleanWatchlist, updateWatchlist, updateLists } from '../redux/actions';
 import { motion } from 'framer-motion';
 
 const classNames = require('classnames')
@@ -49,6 +49,7 @@ const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cl
                         setSessionId(response.session_id)
                         updateAccInfo(response.session_id)
                         updateWatchlist(response.session_id)
+                        updateLists(response.session_id)
                         
                       } else {
                         setErr(response.status_message)
