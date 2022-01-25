@@ -1,5 +1,5 @@
 import { getAccInfo } from "../components/api"
-import { CLEAN_ACCINFO, CLEAN_FAVORITES, CLEAN_WATCHLIST, SET_SESSION_ID, UPDATE_ACCINFO, UPDATE_FAVORITES, UPDATE_LISTS, UPDATE_WATCHLIST } from "./types"
+import { CHANGE_LANGUAGE, CLEAN_ACCINFO, CLEAN_FAVORITES, CLEAN_WATCHLIST, SET_SESSION_ID, UPDATE_ACCINFO, UPDATE_FAVORITES, UPDATE_LISTS, UPDATE_WATCHLIST } from "./types"
 
 const initialState = {
   session: localStorage.getItem('session') || '',
@@ -19,6 +19,7 @@ const initialState = {
     {"id":53,"name":"Thriller"}, {"id":10752,"name":"War"},
     {"id":37,"name":"Western"}
   ],
+  language: localStorage.getItem('language') || 'en',
 }
 
 export const sessionReducer = (state = initialState, action) => {
@@ -41,6 +42,8 @@ export const sessionReducer = (state = initialState, action) => {
       return ({...state, lists: action.payload})
     case CLEAN_FAVORITES:
       return ({...state, favorites: {}})
+    case CHANGE_LANGUAGE:
+      return ({...state, language: action.payload})
   }
   return state
 }

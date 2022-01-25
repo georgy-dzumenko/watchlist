@@ -1,5 +1,5 @@
 import { getAccInfo, getFavorites, getLists, getMoviesById, getWatchlist } from "../components/api"
-import { CLEAN_ACCINFO, CLEAN_FAVORITES, CLEAN_WATCHLIST, GET_WATCHLIST, SET_SESSION_ID, UPDATE_ACCINFO, UPDATE_FAVORITES, UPDATE_LISTS, UPDATE_WATCHLIST } from "./types"
+import { CHANGE_LANGUAGE, CLEAN_ACCINFO, CLEAN_FAVORITES, CLEAN_WATCHLIST, GET_WATCHLIST, SET_SESSION_ID, UPDATE_ACCINFO, UPDATE_FAVORITES, UPDATE_LISTS, UPDATE_WATCHLIST } from "./types"
 
 export const setSessionId = (session_id) => {
   localStorage.setItem('session', session_id)
@@ -81,4 +81,9 @@ export const updateLists = (session_id) => {
 export const cleanFavoritesList = () => {
   localStorage.setItem('favorites', '{}')
   return ({type: CLEAN_FAVORITES})
+}
+
+export const changeLanguage = (language) => {
+  localStorage.setItem('language', language)
+  return ({type: CHANGE_LANGUAGE, payload: language})
 }

@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import MarkAsFavoriteButton from '../components/MarkAsFavoriteButton';
 import { Picture } from '../components/Picture';
 import AddToListButton from '../components/AddToListButton';
+import { translate } from '../components/translate';
 
 const MoviePage = ({accInfo}) => {
   console.log('перейшов')
@@ -86,29 +87,21 @@ const MoviePage = ({accInfo}) => {
                 }
                 <div key="selected-movie-action-buttons" className="grid__item--1-12">
                   <div className="movie-page__action">
-                    <div className="movie-page__activon-title">
-                      Add to/remove from <Link to={`/watchlist/${match.params.movieType}`} className="movie-page__action-title-link">watchlist</Link>
-                    </div>
-                    {!!accInfo.username
-                      &&
+                    {accInfo.id && 
+                      <>
                         <AddToWatchListButton
                           media_id={mediaId}
                           media_type={mediaType}
                         />
-                    }
-                    {!!accInfo.username
-                      &&
                         <MarkAsFavoriteButton
                           media_id={mediaId}
                           media_type={mediaType}
                         />
-                    }
-                    {!!accInfo.username
-                      &&
                         <AddToListButton
                           media_id={mediaId}
                           media_type={mediaType}
                         />
+                      </>
                     }
                   </div>
                 </div>

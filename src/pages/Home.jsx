@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
-import { getMoviesByYear } from '../components/api'
+import { getMoviesByYear, getTrending } from '../components/api'
 import { MoviesSlider } from '../components/MoviesSlider';
 import { Poster } from '../components/Poster';
+import { translate } from '../components/translate';
 
 const Home = ({accInfo}) => {
   const [moviesOnPoster, setMoviesOnPoster] = useState([]);
-  const [newTv, setNewTv] = useState([]);
-  const [newMovies, setNewMovies] = useState([]);
+  const [trending, setTrending] = useState([]);
 
   useEffect(() => {
-    getMoviesByYear("2021", 'multi')
+    getTrending()
       .then((result) => setMoviesOnPoster(result))
-    getMoviesByYear("2021", 'movie')
-      .then((result) => setNewMovies(result))
-    getMoviesByYear("2021", 'tv')
-      .then((result) => setNewTv(result))
+    getTrending()
+      .then((result) => setTrending(result))
   }, [])
 
   return (
@@ -23,27 +21,30 @@ const Home = ({accInfo}) => {
       <div className="container">
         <h1 className="page__title">
           {!accInfo?.username
-            ? "Home"
-            : `Hi, ${accInfo?.username}!`
+            ? translate({
+              'en': "Home",
+              "uk": 'Домашня сторінка'
+            })
+            : `${translate({
+              'en': "Ні,",
+              "uk": 'Привіт,'
+            })} ${accInfo?.username}!`
           }
         </h1>
         
         <section className="page__section">
           <main>
-            <Poster moviesList={moviesOnPoster}/>
+            <Poster moviesList={trending}/>
           </main>
         </section>
         <section className="page__section">
           <div className="page__title">
-            Newest tv shows
+            {translate({
+              'en': "Trending",
+              "uk": 'У тренді'
+            })}
           </div>
-          <MoviesSlider moviesList={newTv}/>
-        </section>
-        <section className="page__section">
-          <div className="page__title">
-            Newest movies
-          </div>
-          <MoviesSlider moviesList={newMovies}/>
+          <MoviesSlider moviesList={trending}/>
         </section>
       </div>
     </div>

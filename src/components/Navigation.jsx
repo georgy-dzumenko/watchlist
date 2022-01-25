@@ -10,11 +10,25 @@ import { connect } from 'react-redux'
 import { getAccInfo, getPersonImg } from './api'
 import { AnimateSharedLayout, motion, useAnimation } from 'framer-motion'
 
-const Navigation = ({accInfo}) => {
+
+import { changeLanguage } from '../redux/actions'
+import { translate } from './translate'
+
+const Navigation = ({accInfo, language, changeLanguage}) => {
   const location = useLocation();
   const menuAnimation = useAnimation();
-  const AvatarAnimation = useAnimation();
+  const avatarAnimation = useAnimation();
+  const languageAnim = useAnimation();
   console.log(location)
+  const [firstload, setFirstLoad] = useState(true);
+
+  useEffect(() => {
+    if(!firstload) {
+      window.location.reload()
+    }
+
+    setFirstLoad(false)
+  }, [language]);
 
   return (
     <div className="navigation">
@@ -39,13 +53,19 @@ const Navigation = ({accInfo}) => {
           <div className="navigation__main">
             <Link to="/info" className="navigation__link">
               <div className="navigation__link-text">
-                info
+                {translate({
+                  'en': "info",
+                  "uk": 'інформація'
+                })}
               </div>
               {location.pathname === '/info' && <ActiveLine/>}
             </Link>
             <Link to="/search" className="navigation__link">
               <div className="navigation__link-text">
-                search
+                {translate({
+                  'en': "search",
+                  "uk": 'пошук'
+                })}
               </div>
               {location.pathname === '/search' && <ActiveLine/>}
             </Link>
@@ -59,7 +79,10 @@ const Navigation = ({accInfo}) => {
               className="navigation__link--paddingless"
             >
               <div className="navigation__link-text">
-                log in
+                {translate({
+                  'en': "log in",
+                  "uk": 'увійти'
+                })}
               </div>
             </HashLink>
           }
@@ -68,11 +91,11 @@ const Navigation = ({accInfo}) => {
               className="navigation__avatar-container"
               onHoverStart={() => {
                 menuAnimation.start({scale: '100%', opacity: 1})
-                AvatarAnimation.start({scale: '120%'})
+                avatarAnimation.start({scale: '120%'})
               }}
               onHoverEnd={() => {
                 menuAnimation.start({scale: 0, opacity: 0})
-                AvatarAnimation.start({scale: '100%'})
+                avatarAnimation.start({scale: '100%'})
               }}
             >
               <motion.div
@@ -83,31 +106,75 @@ const Navigation = ({accInfo}) => {
                 <div className="profile-settings__header">
                   {accInfo.username}
                 </div>
+                <motion.div
+                  onHoverStart={() => {languageAnim.start({scale: "100%"})}}
+                  onHoverEnd={() => {languageAnim.start({scale: 0})}}
+                  to='/watchlist/tv'
+                  className="profile-settings__option"
+                >
+                  ‹ {translate({
+                    'en': "language",
+                    "uk": 'мова'
+                  })}
+                  <motion.div
+                    initial={{scale: 0, translateX: "-100%"}}
+                    animate={languageAnim}
+                    className="profile-settings__backdrop-content"
+                  >
+                    <div onClick={() => {changeLanguage('en')}} className="profile-settings__option">
+                      english {language === 'en' && "✓"}
+                    </div>
+                    <div onClick={() => {changeLanguage('uk')}}className="profile-settings__option">
+                      українська {language === 'uk' && "✓"}
+                    </div>
+                  </motion.div>
+                </motion.div>
                 <div className="profile-settings__label">
-                  account
+                  {translate({
+                    'en': "account",
+                    "uk": 'аккаунт'
+                  })}
                 </div>
                 <Link to='/watchlist/tv'className="profile-settings__option">
-                    profile
+                  {translate({
+                    'en': "profile",
+                    "uk": 'профіль'
+                  })}
                 </Link>
                 <HashLink to='#login'className="profile-settings__option">
-                    log out
+                  {translate({
+                    'en': "log out",
+                    "uk": 'вийти'
+                  })}
                 </HashLink>
                 <div className="profile-settings__label">
-                  film catalogues
+                  {translate({
+                    'en': "film catalogues",
+                    "uk": 'каталоги фільмів'
+                  })}
                 </div>
                 <Link to='/watchlist/tv'className="profile-settings__option">
-                    watchlist
+                  {translate({
+                    'en': "watchlist",
+                    "uk": '"до перегляду"'
+                  })}
                 </Link>
                 <Link to='/favorites/tv'className="profile-settings__option">
-                    favorites
+                  {translate({
+                    'en': "favorites",
+                    "uk": 'улюблені'
+                  })}
                 </Link>
-                <Link to='/lists'className="profile-settings__option">
-                    lists
+                <Link to='/lists'className="profile-settings__option profile-settings__option--last">
+                  {translate({
+                    'en': "lists",
+                    "uk": 'списки'
+                  })}
                 </Link>
               </motion.div>
               <motion.img
                 initial={{ scale: '100%' }}
-                animate={AvatarAnimation}
+                animate={avatarAnimation}
                 src={getPersonImg(accInfo?.avatar?.tmdb?.avatar_path)}
                 alt=""
                 className="navigation__avatar"
@@ -138,4 +205,4 @@ function ActiveLine() {
   )
 }
 
-export default connect((state) => ({accInfo: state.session.accInfo}))(Navigation)
+export default connect((state) => ({accInfo: state.session.accInfo, language: state.session.language}), {changeLanguage})(Navigation)
