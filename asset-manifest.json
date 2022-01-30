@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/git@github.com:georgy-dzumenko/watchlist.git/static/css/main.073c9b0a.css",
-    "main.js": "/git@github.com:georgy-dzumenko/watchlist.git/static/js/main.6d65cf68.js",
-    "static/js/787.2c859936.chunk.js": "/git@github.com:georgy-dzumenko/watchlist.git/static/js/787.2c859936.chunk.js",
-    "static/media/logo.svg": "/git@github.com:georgy-dzumenko/watchlist.git/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/git@github.com:georgy-dzumenko/watchlist.git/index.html",
-    "main.073c9b0a.css.map": "/git@github.com:georgy-dzumenko/watchlist.git/static/css/main.073c9b0a.css.map",
-    "main.6d65cf68.js.map": "/git@github.com:georgy-dzumenko/watchlist.git/static/js/main.6d65cf68.js.map",
-    "787.2c859936.chunk.js.map": "/git@github.com:georgy-dzumenko/watchlist.git/static/js/787.2c859936.chunk.js.map"
+    "main.css": "/watchlist/static/css/main.073c9b0a.css",
+    "main.js": "/watchlist/static/js/main.4cb7df6e.js",
+    "static/js/787.2c859936.chunk.js": "/watchlist/static/js/787.2c859936.chunk.js",
+    "static/media/logo.svg": "/watchlist/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/watchlist/index.html",
+    "main.073c9b0a.css.map": "/watchlist/static/css/main.073c9b0a.css.map",
+    "main.4cb7df6e.js.map": "/watchlist/static/js/main.4cb7df6e.js.map",
+    "787.2c859936.chunk.js.map": "/watchlist/static/js/787.2c859936.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.6d65cf68.js"
+    "static/js/main.4cb7df6e.js"
   ]
 }
