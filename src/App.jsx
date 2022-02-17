@@ -13,6 +13,7 @@ import Navigation from './components/Navigation'
 import WatchlistPage from './pages/WatchlistPage';
 import FavoritesPage from './pages/FavoritesPage';
 import ListsPage from './pages/ListsPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   const match = useRouteMatch('/:mediaType/:mediaId')
@@ -56,6 +57,9 @@ function App() {
             :
             <CollectionPage/>
           }
+        </Route>
+        <Route path="/profile" exact>
+          <ProfilePage/>
         </Route>
       </Switch>
       

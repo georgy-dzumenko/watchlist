@@ -1,7 +1,8 @@
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import { getCreatedList } from "./api";
+import lottie from "lottie-web";
 
 export const ListSelector = ({ id, name }) => {
   const history = useHistory();
@@ -12,13 +13,19 @@ export const ListSelector = ({ id, name }) => {
     console.log(match.params.listId, id)
     if(+match.params.listId === id) {
       animation.start({
-        translateX: 10,
+        transformOrigin: "left bottom",
+        height: "75px",
+        fontSize: "30px",
+        backgroundColor: "red",
         transition: {duration: 0.01},
       })
     } else {
       animation.start({
-        translateX: 0,
-        transition: {duration: 0.01}
+        transformOrigin: "left bottom",
+        height: "50px",
+        fontSize: "20px",
+        backgroundColor: "rgba(255, 0, 0, 0.5)",
+        transition: {duration: 0.01},
       })
     }
   }, [match.params.listId])
@@ -29,6 +36,10 @@ export const ListSelector = ({ id, name }) => {
       key={id}
       className="lists-page__list-option"
       onClick={() => {
+        if(window.location.href.includes(`${id}`)) {
+          history.push(`/lists`)
+          return;  
+        }
         history.push(`/lists/${id}`)
       }}
     >

@@ -26,8 +26,10 @@
 @import "./blocks/add-to-list-window.scss";
 @import "./blocks/list-card.scss";
 @import "./blocks/profile-settings.scss";
+@import "./blocks/profile-page.scss";
 @import "utils/vars";
 @import "utils/mixins";
+
 html {
   position: relative;
   margin: 0;

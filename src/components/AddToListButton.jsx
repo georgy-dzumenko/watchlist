@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { addMovieToList, createList, getLists } from './api';
 import { motion } from 'framer-motion';
 import { updateLists } from '../redux/actions';
+import checkmark from '../icons/checkmark.png'
 
 const classNames = require('classnames')
 
@@ -90,9 +91,10 @@ const AddToListButton = ({session_id, accInfo, lists, media_id, media_type, watc
                 >
                   <form onSubmit={(event) => {
                     console.log(newListData)
-                    createList(newListData.name, newListData.description, session_id)
+                    createList(newListData.name, newListData.description, session_id).then(() => {
+                      updateLists(session_id)
+                    })
                     
-                    updateLists(session_id)
                     setNewActive(false);
                   }}>
                     <input
@@ -126,6 +128,7 @@ const AddToListButton = ({session_id, accInfo, lists, media_id, media_type, watc
                       className="add-to-list-window__list-element"
                     >
                       {list.name}
+                      <img style={{width: '25px', height: '25px', objectFit: 'contain'}} src={checkmark} alt="added" />
                     </li>
                   ))}
                 </ul>

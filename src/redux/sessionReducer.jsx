@@ -19,7 +19,7 @@ const initialState = {
     {"id":53,"name":"Thriller"}, {"id":10752,"name":"War"},
     {"id":37,"name":"Western"}
   ],
-  language: localStorage.getItem('language') || 'en',
+  language: localStorage.getItem('language'),
 }
 
 export const sessionReducer = (state = initialState, action) => {

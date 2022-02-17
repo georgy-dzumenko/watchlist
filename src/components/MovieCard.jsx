@@ -6,6 +6,7 @@ import MarkAsFavoriteButton from './MarkAsFavoriteButton';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import AddToListButton from './AddToListButton';
 
 const classNames = require("classnames");
 

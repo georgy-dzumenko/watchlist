@@ -40,7 +40,7 @@ export const addMovieToList = (list_id, media_id, session_id) => fetch(
             media_id
         })
     }    
-)
+).then((resp) => console.log(resp))
 
 export const deleteList = (list_id, session_id) => fetch(
     `${BASE_URL}list/${list_id}?api_key=${api_key}&session_id=${session_id}`,

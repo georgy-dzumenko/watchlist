@@ -1,0 +1,35 @@
+.profile-page {
+  &__avatar-container {
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
+  }
+
+  &__avatar {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px $c-red double
+  }
+
+  &__description {
+    transform-origin: left;
+    display: block;
+    border-left: 5px $c-red solid;
+    background-color: rgb(233, 233, 233);
+  }
+
+  &__username {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 40px;
+    padding: 2px 0 10px 10px;
+    background-color: $c-red;
+    height: min-content;
+    color: #fff;
+
+  }
+}

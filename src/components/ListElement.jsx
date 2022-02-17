@@ -9,7 +9,7 @@ import { useInView } from 'react-intersection-observer';
 
 const classNames = require("classnames");
 
-const ListElement = ({ movie, genres, media_type}) => {
+const ListElement = ({ media, genres}) => {
   const history = useHistory();
   const {ref, inView} = useInView()
   const animation = useAnimation();
@@ -32,11 +32,17 @@ const ListElement = ({ movie, genres, media_type}) => {
       animate={animation}
       className={classNames("list-card")}
     >
-      <div className="list-card__img">
-        <Picture picture_path={movie.poster_path}/>
+      <div
+        onClick={() => {
+          history.push(`/${media.media_type}/${media.id}`)
+          window.location.reload();
+        }}
+        className="list-card__img"
+      >
+        <Picture picture_path={media.poster_path}/>
       </div>
       <div className="list-card__title">
-        {movie.title}
+        {media.title}
       </div>
       {/* <div className="watchlist__remove-from-watchlist-block">
         <AddToWatchListButton media_id={movie.id} media_type={media_type} />

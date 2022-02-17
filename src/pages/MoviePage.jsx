@@ -97,10 +97,12 @@ const MoviePage = ({accInfo}) => {
                           media_id={mediaId}
                           media_type={mediaType}
                         />
-                        <AddToListButton
-                          media_id={mediaId}
-                          media_type={mediaType}
-                        />
+                        {mediaType === 'movie' &&
+                          <AddToListButton
+                            media_id={mediaId}
+                            media_type={mediaType}
+                          />
+                        }
                       </>
                     }
                   </div>
@@ -122,7 +124,10 @@ const MoviePage = ({accInfo}) => {
           </section>
           <section className="page__section">
             <div className="page__title">
-              reviews
+              {translate({
+                'en': "Reviews",
+                "uk": 'Відгуки'
+              })}
             </div>
               {
                 reviews.map((review) => (
@@ -154,7 +159,10 @@ const MoviePage = ({accInfo}) => {
               ?
                 <>
                   <div className="page__title">
-                   Cast
+                    {translate({
+                      'en': "Cast",
+                      "uk": 'Акторський склад'
+                    })}
                   </div>
                   <MoviesSlider key="cast-slider" peopleList={cast} />
                 </>
@@ -164,7 +172,10 @@ const MoviePage = ({accInfo}) => {
               ?
                 <>
                   <div className="page__title">
-                    Crew
+                    {translate({
+                      'en': "Crew",
+                      "uk": 'Знімальна група'
+                    })}
                   </div>
                   <MoviesSlider key="crew-slider" peopleList={crew} />
                 </>
@@ -173,7 +184,10 @@ const MoviePage = ({accInfo}) => {
           </section>
           <section className="page__section">
             <div className="page__title">
-              Similar
+              {translate({
+                'en': "Similar",
+                "uk": 'Схоже'
+              })}
             </div>
             <MoviesSlider key="similar-slider" moviesList={similar} />
           </section>

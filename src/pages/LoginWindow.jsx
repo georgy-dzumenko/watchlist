@@ -5,10 +5,11 @@ import { createSession, createToken, deleteSession } from '../components/api';
 import { createSessionWithLogin, getAccInfo } from '../components/api';
 import { cleanAccInfo, setSessionId, updateAccInfo, cleanWatchlist, updateWatchlist, updateLists } from '../redux/actions';
 import { motion } from 'framer-motion';
+import { translate } from '../components/translate';
 
 const classNames = require('classnames')
 
-const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cleanWatchlist, updateWatchlist}) => {
+const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cleanWatchlist, updateWatchlist, updateLists}) => {
   const location = useLocation()
   const [userData, setUserData] = useState({username: '', password: ''});
   const [loading, setLoading] = useState(false);
@@ -47,9 +48,9 @@ const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cl
                       if(response.success) {
                         history.push({hash:"#"})
                         setSessionId(response.session_id)
+                        updateLists(response.session_id)
                         updateAccInfo(response.session_id)
                         updateWatchlist(response.session_id)
-                        updateLists(response.session_id)
                         
                       } else {
                         setErr(response.status_message)
@@ -69,7 +70,7 @@ const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cl
         }}
       >
         <div className="login__title">
-          {!isLogged ? "Log in" : "Are you sure?"}
+          {!isLogged ? translate({"en": "Log in", "uk": "Увійти"}) : translate({"en": "Are you sure?", "uk": "Ви впевнені?"})}
         </div>
         <div className="login__err">
           {err}
@@ -93,7 +94,7 @@ const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cl
               }
               {!loading &&
                 <>
-                  <label htmlFor="username" className="login__label">User name</label>
+                  <label htmlFor="username" className="login__label">{translate({"en": "Username", "uk": "Ім'я користувача"})}</label>
                   <input
                     value={userData.username}
                     onChange={(event) => setUserData({
@@ -104,7 +105,7 @@ const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cl
                     id="username"
                     className="login__field"
                   />
-                  <label htmlFor="password" className="login__label">Password</label>
+                  <label htmlFor="password" className="login__label">{translate({"en": "Password", "uk": "Пароль"})}</label>
                   <input
                     value={userData.password}
                     onChange={(event) => setUserData({
@@ -120,7 +121,10 @@ const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cl
                     type="submit"
                     className="login__submit-button"
                   >
-                    accept
+                    {translate({
+                      'en': "accept",
+                      "uk": 'прийняти'
+                    })}
                   </button>
                 </>
               }
@@ -132,14 +136,23 @@ const LoginWindow = ({ session_id, setSessionId, updateAccInfo, cleanAccInfo, cl
                 type="submit"
                 className="login__log-out-button"
               >
-                Log out
+                {translate({
+                  'en': "Log out",
+                  "uk": 'вийти'
+                })}
               </button>
             </>
         }
         <a onClick={() => history.push({hash: '#'})} className="login__close-button"></a>
         {!isLogged &&
           <span className="login__sign-up-field">
-            Don't have an account? <a href="https://www.themoviedb.org/signup" className="login__sign-up-link">Sign up!</a>
+            {translate({
+              'en': "Don't have an account?",
+              "uk": 'Не маєте аккаунта?'
+            })} <a href="https://www.themoviedb.org/signup" className="login__sign-up-link">{translate({
+              'en': "Sign up!",
+              "uk": 'Зареєструйтесь!'
+            })}</a>
           </span>
         }
       </form>
@@ -154,6 +167,7 @@ export default connect(
     cleanAccInfo,
     setSessionId,
     updateAccInfo,
-    updateWatchlist
+    updateWatchlist,
+    updateLists
   }
 )(LoginWindow)

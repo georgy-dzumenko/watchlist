@@ -10,13 +10,14 @@ export const setSessionId = (session_id) => {
 }
 
 export const updateAccInfo = (session_id) => {
-  console.log('upd')
+  console.log('res.iso_639_1')
   return dispatch => {
     getAccInfo(session_id).then((res) => {
       localStorage.setItem('accInfo', JSON.stringify(res))
       dispatch({
         type: UPDATE_ACCINFO,
         payload: res,
+        language: res.iso_639_1,
       })
     })
   }

@@ -10,20 +10,22 @@
   }
 
   &__select-section {
+    transform-origin: left;
     min-height: 100vh;
-    background-color: $c-light-red;
+    background-color: $c-light-gray;
+    border-left: 5px $c-red solid;
   }
 
   &__list-option {
     display: flex;
-    height: 40px;
     border: 2px solid $c-light-gray;
     color: #fff;
     font-size: large;
     align-content: center;
     align-items: center;
     padding-left: 10px;
-    background-color: $c-red;
+    background-color: rgba(255, 8, 0, 0.521);
+    backdrop-filter: blur(2px);
     transition: all 0.3s ease;
     cursor: pointer;
 

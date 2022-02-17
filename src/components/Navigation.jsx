@@ -135,7 +135,7 @@ const Navigation = ({accInfo, language, changeLanguage}) => {
                     "uk": 'аккаунт'
                   })}
                 </div>
-                <Link to='/watchlist/tv'className="profile-settings__option">
+                <Link to='/profile'className="profile-settings__option">
                   {translate({
                     'en': "profile",
                     "uk": 'профіль'

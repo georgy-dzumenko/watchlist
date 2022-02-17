@@ -7,6 +7,8 @@ import ListElement from '../components/ListElement';
 import { motion, useAnimation } from 'framer-motion';
 import { ListSelector } from '../components/ListSelector';
 import { updateLists } from '../redux/actions';
+import add from '../lottie/add.json'
+import Lottie from 'react-lottie';
 
 const classNames = require('classnames')
 
@@ -46,14 +48,15 @@ const ListsPage = ({lists, session_id, updateLists}) => {
             <p className="lists-page__description">{selectedList.description}</p>
             <div className="lists-page__list">
               {selectedList.items?.map((movie) => (
-                <ListElement movie={movie}/>
+                <ListElement media={movie}/>
               ))}
             </div>
             <div
               onClick={() => {
-                deleteList(match.params.listId, session_id)
-                history.push('/lists/')
-                updateLists()
+                history.push('/lists')
+                deleteList(match.params.listId, session_id).then(() => {
+                  updateLists(session_id)
+                })
               }}
               className="lists-page__delete-button"
             >
